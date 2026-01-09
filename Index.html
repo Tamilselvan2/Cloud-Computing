@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Student Calc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-active:active { transform: scale(0.95); }
+    </style>
+</head>
+<body class="bg-slate-900 text-white min-h-screen flex items-center justify-center font-sans">
+
+    <div id="auth-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-md">
+        <div class="glass p-8 rounded-2xl shadow-2xl text-center max-w-sm w-full">
+            <h2 class="text-2xl font-bold mb-4">Welcome, Student</h2>
+            <input type="text" id="roll-input" placeholder="Enter Roll Number" 
+                class="w-full bg-slate-800 border border-slate-700 p-3 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button onclick="startApp()" class="w-full bg-blue-600 hover:bg-blue-500 py-3 rounded-lg font-semibold transition">Access Calculator</button>
+        </div>
+    </div>
+
+    <div class="container max-w-4xl px-4 hidden" id="main-app">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="md:col-span-2 glass p-6 rounded-3xl shadow-xl">
+                <div class="flex justify-between items-center mb-4">
+                    <span id="student-display" class="text-slate-400 text-sm font-mono"></span>
+                    <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Standard Mode</span>
+                </div>
+                
+                <input type="text" id="display" readonly 
+                    class="w-full bg-transparent text-right text-5xl font-light mb-6 p-2 focus:outline-none overflow-x-auto" placeholder="0">
+
+                <div class="grid grid-cols-4 gap-3">
+                    <button onclick="clearDisplay()" class="glass col-span-2 py-6 rounded-2xl text-red-400 font-bold btn-active">AC</button>
+                    <button onclick="deleteLast()" class="glass py-6 rounded-2xl text-blue-400 btn-active">DEL</button>
+                    <button onclick="appendToDisplay('/')" class="glass py-6 rounded-2xl text-blue-400 btn-active">÷</button>
+                    <button onclick="appendToDisplay('7')" class="glass py-6 rounded-2xl btn-active">7</button>
+                    <button onclick="appendToDisplay('8')" class="glass py-6 rounded-2xl btn-active">8</button>
+                    <button onclick="appendToDisplay('9')" class="glass py-6 rounded-2xl btn-active">9</button>
+                    <button onclick="appendToDisplay('*')" class="glass py-6 rounded-2xl text-blue-400 btn-active">×</button>
+                    <button onclick="appendToDisplay('4')" class="glass py-6 rounded-2xl btn-active">4</button>
+                    <button onclick="appendToDisplay('5')" class="glass py-6 rounded-2xl btn-active">5</button>
+                    <button onclick="appendToDisplay('6')" class="glass py-6 rounded-2xl btn-active">6</button>
+                    <button onclick="appendToDisplay('-')" class="glass py-6 rounded-2xl text-blue-400 btn-active">−</button>
+                    <button onclick="appendToDisplay('1')" class="glass py-6 rounded-2xl btn-active">1</button>
+                    <button onclick="appendToDisplay('2')" class="glass py-6 rounded-2xl btn-active">2</button>
+                    <button onclick="appendToDisplay('3')" class="glass py-6 rounded-2xl btn-active">3</button>
+                    <button onclick="appendToDisplay('+')" class="glass py-6 rounded-2xl text-blue-400 btn-active">+</button>
+                    <button onclick="appendToDisplay('0')" class="glass col-span-2 py-6 rounded-2xl btn-active">0</button>
+                    <button onclick="appendToDisplay('.')" class="glass py-6 rounded-2xl btn-active">.</button>
+                    <button onclick="calculate()" class="bg-blue-600 py-6 rounded-2xl font-bold btn-active shadow-lg shadow-blue-500/20">=</button>
+                </div>
+            </div>
+
+            <div class="glass p-6 rounded-3xl overflow-y-auto max-h-[600px]">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-slate-300">History</h3>
+                    <button onclick="clearHistory()" class="text-xs text-slate-500 hover:text-red-400">Clear</button>
+                </div>
+                <div id="history-list" class="space-y-3">
+                    <p class="text-slate-500 text-sm italic">No recent calculations</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
