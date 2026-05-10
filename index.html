@@ -127,11 +127,10 @@
     border: 1px solid var(--border);
     overflow: hidden;
     position: relative;
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease;
+    transition: box-shadow 0.5s ease;
   }
 
   .bento-card:hover {
-    transform: scale(1.02);
     box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
   }
 
@@ -1405,24 +1404,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ============================================
-// 3D TILT ON BENTO CARDS
+// SUBTLE HOVER LIFT ON BENTO CARDS
 // ============================================
-document.querySelectorAll('.bento-card').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const rx = (y - cy) / 25;
-    const ry = (cx - x) / 25;
-    card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
-  });
+// Only enable on devices with fine pointer (mouse/trackpad)
+// Skip entirely on touch devices
+const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+if (!isTouchDevice) {
+  document.querySelectorAll('.bento-card').forEach(card => {
+    // Subtle lift on hover — no 3D rotation, just a gentle translate
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease';
+      card.style.transform = 'translateY(-4px)';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'translateY(0)';
+    });
   });
-});
+}
 </script>
 
 </body>
