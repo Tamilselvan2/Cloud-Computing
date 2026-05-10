@@ -1,77 +1,531 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Student Calc</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .btn-active:active { transform: scale(0.95); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSN Exam Prep: 20E12E38</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Chosen Palette: Warm Academics (Slate-50 bg, Slate-800 text, Indigo-600/Teal-600 accents) -->
+<!-- Application Structure Plan: The SPA is structured as a 'Smart Study Dashboard' tailored for last-minute exam preparation. It uses a sidebar navigation to switch between the 5 syllabus units, keeping the cognitive load low. The main content area dynamically renders detailed notes, categorized into sub-topics. To satisfy the need for 3, 7, and 15-mark question preparation, content is structured with clear definitions, elaborated processes, and HTML/CSS-based block diagrams. A 'Quick Stats' visualization using Chart.js provides insight into typical WSN constraints, enhancing the learning experience without overwhelming the user. -->
+<!-- Visualization & Content Choices: 
+1. Source: Sensor Node Hardware -> Goal: Inform/Visualize Structure -> Method: HTML/CSS Flexbox Diagram -> Interaction: Hover effects on components to read descriptions -> Justification: Replaces required block diagrams without using SVG.
+2. Source: WSN Energy Constraints -> Goal: Inform/Compare -> Method: Chart.js Doughnut Chart -> Interaction: Hover for exact percentages -> Justification: Clearly illustrates where power is consumed in a node, crucial for routing protocol understanding.
+3. Source: Syllabus Topics -> Goal: Organize/Navigate -> Method: Dynamic DOM injection via JS -> Interaction: Sidebar clicks -> Justification: Allows seamless switching between massive amounts of text without page reloads.
+-->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<style>
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; color: #1e293b; }
+.chart-container { position: relative; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto; height: 300px; max-height: 350px; }
+.diagram-box { transition: all 0.3s ease; }
+.diagram-box:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.content-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+.content-section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+</style>
 </head>
-<body class="bg-slate-900 text-white min-h-screen flex items-center justify-center font-sans">
+<body class="h-screen flex flex-col md:flex-row overflow-hidden">
 
-    <div id="auth-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-md">
-        <div class="glass p-8 rounded-2xl shadow-2xl text-center max-w-sm w-full">
-            <h2 class="text-2xl font-bold mb-4">Welcome, Student</h2>
-            <input type="text" id="roll-input" placeholder="Enter Roll Number" 
-                class="w-full bg-slate-800 border border-slate-700 p-3 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <button onclick="startApp()" class="w-full bg-blue-600 hover:bg-blue-500 py-3 rounded-lg font-semibold transition">Access Calculator</button>
-        </div>
-    </div>
+<nav class="bg-indigo-900 text-white w-full md:w-72 flex-shrink-0 shadow-xl z-10 flex flex-col h-auto md:h-full">
+<div class="p-6 border-b border-indigo-800">
+<h1 class="text-2xl font-bold tracking-tight">SSN Exam Prep</h1>
+<p class="text-indigo-300 text-sm mt-1">Course Code: 20E12E38</p>
+<div class="mt-4 bg-indigo-800 rounded p-3 text-center">
+<p class="text-xs uppercase tracking-wider text-indigo-200">Exam Status</p>
+<p class="text-lg font-semibold text-yellow-400">T-Minus 1 Day</p>
+</div>
+</div>
+<div class="flex-grow overflow-y-auto py-4">
+<ul class="space-y-1 px-3" id="nav-list">
+</ul>
+</div>
+<div class="p-4 bg-indigo-950 text-xs text-indigo-400 text-center">
+<p>Intensive Study Module</p>
+</div>
+</nav>
 
-    <div class="container max-w-4xl px-4 hidden" id="main-app">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div class="md:col-span-2 glass p-6 rounded-3xl shadow-xl">
-                <div class="flex justify-between items-center mb-4">
-                    <span id="student-display" class="text-slate-400 text-sm font-mono"></span>
-                    <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Standard Mode</span>
-                </div>
-                
-                <input type="text" id="display" readonly 
-                    class="w-full bg-transparent text-right text-5xl font-light mb-6 p-2 focus:outline-none overflow-x-auto" placeholder="0">
+<main class="flex-grow overflow-y-auto bg-slate-50 relative">
+<div class="max-w-5xl mx-auto p-4 md:p-8" id="main-content">
+</div>
+</main>
 
-                <div class="grid grid-cols-4 gap-3">
-                    <button onclick="clearDisplay()" class="glass col-span-2 py-6 rounded-2xl text-red-400 font-bold btn-active">AC</button>
-                    <button onclick="deleteLast()" class="glass py-6 rounded-2xl text-blue-400 btn-active">DEL</button>
-                    <button onclick="appendToDisplay('/')" class="glass py-6 rounded-2xl text-blue-400 btn-active">÷</button>
-                    <button onclick="appendToDisplay('7')" class="glass py-6 rounded-2xl btn-active">7</button>
-                    <button onclick="appendToDisplay('8')" class="glass py-6 rounded-2xl btn-active">8</button>
-                    <button onclick="appendToDisplay('9')" class="glass py-6 rounded-2xl btn-active">9</button>
-                    <button onclick="appendToDisplay('*')" class="glass py-6 rounded-2xl text-blue-400 btn-active">×</button>
-                    <button onclick="appendToDisplay('4')" class="glass py-6 rounded-2xl btn-active">4</button>
-                    <button onclick="appendToDisplay('5')" class="glass py-6 rounded-2xl btn-active">5</button>
-                    <button onclick="appendToDisplay('6')" class="glass py-6 rounded-2xl btn-active">6</button>
-                    <button onclick="appendToDisplay('-')" class="glass py-6 rounded-2xl text-blue-400 btn-active">−</button>
-                    <button onclick="appendToDisplay('1')" class="glass py-6 rounded-2xl btn-active">1</button>
-                    <button onclick="appendToDisplay('2')" class="glass py-6 rounded-2xl btn-active">2</button>
-                    <button onclick="appendToDisplay('3')" class="glass py-6 rounded-2xl btn-active">3</button>
-                    <button onclick="appendToDisplay('+')" class="glass py-6 rounded-2xl text-blue-400 btn-active">+</button>
-                    <button onclick="appendToDisplay('0')" class="glass col-span-2 py-6 rounded-2xl btn-active">0</button>
-                    <button onclick="appendToDisplay('.')" class="glass py-6 rounded-2xl btn-active">.</button>
-                    <button onclick="calculate()" class="bg-blue-600 py-6 rounded-2xl font-bold btn-active shadow-lg shadow-blue-500/20">=</button>
-                </div>
-            </div>
+<script>
+const syllabusData = [
+{
+id: 'unit1',
+title: 'Unit 1: Wireless Sensor Tech',
+shortTitle: 'U1: WSN Tech',
+intro: 'This unit covers the foundational building blocks of Wireless Sensor Networks, including hardware, software, environments, and communication channels. Focus on node architecture for 7/15 marks.',
+content: `
+<h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-indigo-100 pb-2">Wireless Sensor Technology</h2>
 
-            <div class="glass p-6 rounded-3xl overflow-y-auto max-h-[600px]">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-bold text-slate-300">History</h3>
-                    <button onclick="clearHistory()" class="text-xs text-slate-500 hover:text-red-400">Clear</button>
-                </div>
-                <div id="history-list" class="space-y-3">
-                    <p class="text-slate-500 text-sm italic">No recent calculations</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+<h3 class="text-xl font-semibold text-indigo-700 mb-4">1. Sensor Node Technology (Hardware & Software)</h3>
+<div class="mb-4">
+<span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold uppercase tracking-wide mb-2">Likely 7/15 Mark Question</span>
+<p class="text-slate-700 mb-4">A sensor node (or mote) is the fundamental building block of a WSN. It consists of four main hardware subsystems:</p>
+</div>
 
-    <script src="script.js"></script>
+<div class="bg-slate-50 p-6 rounded-lg border border-slate-200 mb-6">
+<h4 class="text-center font-bold text-slate-600 mb-4">Block Diagram: Sensor Node Hardware Architecture</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+<div class="diagram-box bg-blue-100 border-2 border-blue-300 p-4 rounded-lg text-center">
+<h5 class="font-bold text-blue-800">Sensing Subsystem</h5>
+<p class="text-xs text-blue-600 mt-1">Sensors & Analog-to-Digital Converter (ADC)</p>
+</div>
+<div class="diagram-box bg-purple-100 border-2 border-purple-300 p-4 rounded-lg text-center">
+<h5 class="font-bold text-purple-800">Processing Subsystem</h5>
+<p class="text-xs text-purple-600 mt-1">Microcontroller & Memory (Flash/SRAM)</p>
+</div>
+<div class="diagram-box bg-teal-100 border-2 border-teal-300 p-4 rounded-lg text-center">
+<h5 class="font-bold text-teal-800">Communication Subsystem</h5>
+<p class="text-xs text-teal-600 mt-1">Transceiver (RF communication)</p>
+</div>
+<div class="diagram-box bg-yellow-100 border-2 border-yellow-300 p-4 rounded-lg text-center">
+<h5 class="font-bold text-yellow-800">Power Subsystem</h5>
+<p class="text-xs text-yellow-600 mt-1">Battery & Power Management Unit</p>
+</div>
+</div>
+</div>
+
+<ul class="list-disc pl-6 space-y-2 text-slate-700">
+<li><b>Sensing:</b> Converts physical phenomena (temp, light, vibration) into analog electrical signals, which the ADC converts to digital.</li>
+<li><b>Processing:</b> The 'brain'. Usually a low-power microcontroller. Manages procedures and runs the OS.</li>
+<li><b>Communication:</b> Connects the node to the network. Transmits and receives data. It is the most power-hungry component.</li>
+<li><b>Power:</b> Usually batteries. Limited capacity is the biggest constraint in WSNs.</li>
+<li><b>Software Overview:</b> Requires lightweight Operating Systems like TinyOS, Contiki, or LiteOS. They are event-driven to save power, unlike traditional OS.</li>
+</ul>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+<h3 class="text-xl font-semibold text-indigo-700 mb-4">2. Sensor Taxonomy & Operating Environment</h3>
+<span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold uppercase tracking-wide mb-2">Important for 3 Marks</span>
+<p class="text-slate-700 mb-3"><b>Taxonomy (Classification):</b></p>
+<ul class="list-disc pl-6 space-y-1 text-slate-700 mb-4">
+<li><b>Active vs. Passive:</b> Active sensors emit energy (radar, sonar) to measure; passive sense natural energy (thermometer, camera). Passive consume less power.</li>
+<li><b>Absolute vs. Relative:</b> Absolute measures on an absolute scale; relative measures differences.</li>
+<li><b>Omnidirectional vs. Directional:</b> Depends on the area of coverage.</li>
+</ul>
+<p class="text-slate-700 mb-3"><b>Operating Environment & Trends:</b> WSNs operate in harsh, unattended environments (battlefields, underwater, deep forests). Trends include miniaturization (Smart Dust), energy harvesting (solar, piezo), and integration with IoT.</p>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+<h3 class="text-xl font-semibold text-indigo-700 mb-4">3. Wireless Channels & Multiple Access</h3>
+<div class="grid md:grid-cols-2 gap-6">
+<div>
+<h4 class="font-bold text-slate-800 mb-2">Channel Characteristics</h4>
+<p class="text-slate-700 text-sm mb-2">Wireless channels are prone to errors due to:</p>
+<ul class="list-disc pl-5 text-sm text-slate-700">
+<li><b>Path Loss:</b> Signal attenuation over distance.</li>
+<li><b>Fading:</b> Rapid fluctuations in signal strength due to multipath propagation.</li>
+<li><b>Interference:</b> From other RF devices.</li>
+<li><b>Noise:</b> Thermal and background noise.</li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 mb-2">Multiple Access Techniques</h4>
+<p class="text-slate-700 text-sm mb-2">How multiple nodes share the medium:</p>
+<ul class="list-disc pl-5 text-sm text-slate-700">
+<li><b>FDMA:</b> Frequency Division (different frequencies).</li>
+<li><b>TDMA:</b> Time Division (different time slots - highly used in WSN to save power by sleeping).</li>
+<li><b>CDMA:</b> Code Division (different codes).</li>
+<li><b>CSMA:</b> Carrier Sense (listen before talk - contention based).</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+<h3 class="text-xl font-semibold text-indigo-700 mb-4">4. LANs, PANs, WANs, and MANs</h3>
+<div class="overflow-x-auto">
+<table class="min-w-full text-left text-sm whitespace-nowrap">
+<thead class="uppercase tracking-wider border-b-2 border-indigo-500 bg-indigo-50">
+<tr><th class="px-4 py-3 font-semibold text-indigo-800">Type</th><th class="px-4 py-3 font-semibold text-indigo-800">Range</th><th class="px-4 py-3 font-semibold text-indigo-800">Example Tech</th><th class="px-4 py-3 font-semibold text-indigo-800">WSN Context</th></tr>
+</thead>
+<tbody class="divide-y divide-slate-200">
+<tr><td class="px-4 py-3 font-medium">PAN (Personal)</td><td class="px-4 py-3">~10m</td><td class="px-4 py-3">Bluetooth, Zigbee</td><td class="px-4 py-3">Body Area Networks, Home automation. Highly relevant.</td></tr>
+<tr><td class="px-4 py-3 font-medium">LAN (Local)</td><td class="px-4 py-3">~100m</td><td class="px-4 py-3">Wi-Fi (802.11)</td><td class="px-4 py-3">Building automation, Campus networks.</td></tr>
+<tr><td class="px-4 py-3 font-medium">MAN (Metropolitan)</td><td class="px-4 py-3">City-wide</td><td class="px-4 py-3">WiMAX</td><td class="px-4 py-3">Smart city infrastructure.</td></tr>
+<tr><td class="px-4 py-3 font-medium">WAN (Wide)</td><td class="px-4 py-3">Global</td><td class="px-4 py-3">Cellular (4G/5G)</td><td class="px-4 py-3">Backhaul to connect sensor gateways to cloud.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+`
+},
+{
+id: 'unit2',
+title: 'Unit 2: Ad Hoc/Sensor Networks',
+shortTitle: 'U2: Architecture',
+intro: 'This unit contrasts traditional networks with Ad Hoc and Sensor networks. The focus is on the unique constraints (energy) and the architecture of these networks.',
+content: `
+<h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-indigo-100 pb-2">Ad Hoc & Sensor Networks</h2>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+<h3 class="text-xl font-semibold text-indigo-700 mb-4">1. Sensor Network Architecture</h3>
+<p class="text-slate-700 mb-4">WSNs typically follow a structured architecture to collect data from the environment and send it to an end-user.</p>
+
+<div class="bg-slate-50 p-6 rounded-lg border border-slate-200 mb-6">
+<h4 class="text-center font-bold text-slate-600 mb-4">Block Diagram: WSN Architecture Flow</h4>
+<div class="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+<div class="bg-green-100 border-2 border-green-300 p-3 rounded-full w-24 h-24 flex items-center justify-center font-bold text-green-800 text-sm">Sensor<br>Nodes</div>
+<div class="text-2xl text-slate-400 font-bold">&#8594;</div>
+<div class="bg-blue-100 border-2 border-blue-300 p-3 rounded-full w-24 h-24 flex items-center justify-center font-bold text-blue-800 text-sm">Sink /<br>Gateway</div>
+<div class="text-2xl text-slate-400 font-bold">&#8594;</div>
+<div class="bg-purple-100 border-2 border-purple-300 p-3 rounded-full w-24 h-24 flex items-center justify-center font-bold text-purple-800 text-sm">Internet /<br>Cloud</div>
+<div class="text-2xl text-slate-400 font-bold">&#8594;</div>
+<div class="bg-orange-100 border-2 border-orange-300 p-3 rounded-full w-24 h-24 flex items-center justify-center font-bold text-orange-800 text-sm">End<br>User</div>
+</div>
+</div>
+<ul class="list-disc pl-6 space-y-2 text-slate-700">
+<li><b>Flat Architecture:</b> All nodes have identical roles and battery levels. Good for small networks.</li>
+<li><b>Hierarchical (Clustered) Architecture:</b> Nodes are grouped into clusters. A Cluster Head (CH) aggregates data and sends it to the sink. Highly energy-efficient for large networks (e.g., LEACH protocol).</li>
+</ul>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+<div class="flex flex-col md:flex-row gap-8 items-center">
+<div class="flex-1">
+<h3 class="text-xl font-semibold text-indigo-700 mb-4">2. Unique Constraints and Challenges</h3>
+<span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded font-bold uppercase tracking-wide mb-2">Core Concept - 7 Marks</span>
+<ul class="list-disc pl-6 space-y-2 text-slate-700">
+<li><b>Energy Constraints:</b> The most critical issue. Nodes run on batteries which are often irreplaceable.</li>
+<li><b>Computation/Memory Limits:</b> Microcontrollers have limited processing power and tiny memory footprint (few KBs).</li>
+<li><b>Communication Limits:</b> Low bandwidth, short range, and highly unreliable links due to interference.</li>
+<li><b>Node Density:</b> Massive number of nodes requires scalable protocols.</li>
+<li><b>Harsh Environments:</b> Nodes may fail due to physical damage.</li>
+</ul>
+</div>
+<div class="flex-1 w-full">
+<div class="chart-container">
+<canvas id="energyChart"></canvas>
+</div>
+<p class="text-center text-xs text-slate-500 mt-2">Typical Node Energy Dissipation</p>
+</div>
+</div>
+</div>
+
+<div class="grid md:grid-cols-2 gap-6 mb-8">
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+<h3 class="text-xl font-semibold text-teal-700 mb-3">3. Advantages of Ad Hoc/Sensor Networks</h3>
+<ul class="list-disc pl-5 text-slate-700 text-sm space-y-2">
+<li><b>Infrastructure-less:</b> Easy and rapid deployment without pre-existing routers or towers.</li>
+<li><b>Self-Organizing:</b> Nodes automatically form routing tables and connections.</li>
+<li><b>Fault Tolerance:</b> If one node dies, the network re-routes traffic.</li>
+<li><b>Mobility:</b> Ad Hoc networks naturally support moving nodes.</li>
+</ul>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+<h3 class="text-xl font-semibold text-red-700 mb-3">4. Issues in Ad Hoc Wireless Networks</h3>
+<ul class="list-disc pl-5 text-slate-700 text-sm space-y-2">
+<li><b>Hidden Terminal Problem:</b> Nodes A and C can talk to B, but not to each other. They transmit simultaneously, causing collision at B.</li>
+<li><b>Routing Overhead:</b> Dynamic topology means routing tables must constantly update, wasting bandwidth.</li>
+<li><b>Security:</b> Open wireless medium makes eavesdropping and malicious node insertion easy.</li>
+</ul>
+</div>
+</div>
+`
+},
+{
+id: 'unit3',
+title: 'Unit 3: MAC & Routing Protocols',
+shortTitle: 'U3: MAC/Routing',
+intro: 'A critical unit focusing on how nodes share the wireless medium (MAC) and how data finds its way to the destination (Routing). Memorize the classifications and key protocols like S-MAC.',
+content: `
+<h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-indigo-100 pb-2">MAC and Routing Protocols</h2>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+<h3 class="text-xl font-semibold text-indigo-700 mb-4">1. Classification of MAC Protocols for WSN</h3>
+<span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold uppercase tracking-wide mb-4">Expected 15 Mark Question</span>
+<p class="text-slate-700 mb-4">MAC protocols dictate how nodes access the shared wireless channel. In WSNs, avoiding energy waste (collisions, idle listening, overhearing, control packet overhead) is the main goal.</p>
+
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<div class="border border-slate-200 p-4 rounded bg-slate-50">
+<h4 class="font-bold text-slate-800 mb-2">Contention-Based (CSMA)</h4>
+<p class="text-sm text-slate-600 mb-2">Nodes compete for the channel. If busy, they wait.</p>
+<ul class="list-disc pl-5 text-sm text-slate-700">
+<li><b>Pros:</b> Scalable, adapts to changes, no strict synchronization needed.</li>
+<li><b>Cons:</b> High energy waste due to idle listening and collisions.</li>
+<li><b>Example:</b> CSMA/CA.</li>
+</ul>
+</div>
+<div class="border border-slate-200 p-4 rounded bg-slate-50">
+<h4 class="font-bold text-slate-800 mb-2">Schedule-Based (TDMA)</h4>
+<p class="text-sm text-slate-600 mb-2">Time is divided into slots. Each node gets a slot.</p>
+<ul class="list-disc pl-5 text-sm text-slate-700">
+<li><b>Pros:</b> Collision-free, perfectly eliminates idle listening (nodes sleep when not their slot).</li>
+<li><b>Cons:</b> Requires strict clock synchronization, hard to adapt to topology changes.</li>
+</ul>
+</div>
+</div>
+
+<div class="bg-indigo-50 p-5 rounded border border-indigo-200">
+<h4 class="font-bold text-indigo-800 text-lg mb-2">Key Protocol: S-MAC (Sensor-MAC)</h4>
+<p class="text-slate-700 mb-2">S-MAC is a contention-based protocol designed to reduce energy consumption from <b>idle listening</b>.</p>
+<ul class="list-disc pl-6 text-slate-700 space-y-1">
+<li><b>Periodic Listen and Sleep:</b> Nodes go to sleep for some time, and wake up to listen.</li>
+<li><b>Synchronization:</b> Neighboring nodes form virtual clusters with the same sleep/wake schedules.</li>
+<li><b>Message Passing:</b> Long messages are broken into fragments and sent in a burst to avoid control overhead.</li>
+</ul>
+</div>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+<h3 class="text-xl font-semibold text-indigo-700 mb-4">2. IEEE 802.15.4 Standard</h3>
+<p class="text-slate-700 mb-3">The de facto standard for Low-Rate Wireless Personal Area Networks (LR-WPANs). It defines the Physical (PHY) and MAC layers. ZigBee builds upon this.</p>
+<ul class="list-disc pl-6 text-slate-700 space-y-1">
+<li><b>Focus:</b> Low cost, low speed communication between devices with little to no underlying infrastructure.</li>
+<li><b>Modes:</b> Beacon enabled (uses slotted CSMA/CA, supports Guaranteed Time Slots) and Non-beacon enabled (unslotted CSMA/CA).</li>
+<li><b>Topologies:</b> Star and Peer-to-Peer.</li>
+</ul>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+<h3 class="text-xl font-semibold text-indigo-700 mb-4">3. Routing Protocols Classification</h3>
+<span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold uppercase tracking-wide mb-4">Crucial for 7 Marks</span>
+<p class="text-slate-700 mb-4">Routing in WSNs is challenging due to no global addressing (like IP) and severe energy limits.</p>
+
+<div class="grid md:grid-cols-2 gap-4">
+<div class="p-4 border border-l-4 border-l-blue-500 rounded bg-white shadow-sm">
+<h4 class="font-bold text-slate-800">1. Proactive (Table-Driven)</h4>
+<p class="text-sm text-slate-600 mt-1">Maintains routing tables constantly, regardless of need. High overhead, but zero delay when sending. (e.g., DSDV)</p>
+</div>
+<div class="p-4 border border-l-4 border-l-green-500 rounded bg-white shadow-sm">
+<h4 class="font-bold text-slate-800">2. Reactive (On-Demand)</h4>
+<p class="text-sm text-slate-600 mt-1">Finds a route only when there is data to send. Lower overhead, but initial delay. (e.g., AODV, DSR)</p>
+</div>
+<div class="p-4 border border-l-4 border-l-purple-500 rounded bg-white shadow-sm">
+<h4 class="font-bold text-slate-800">3. Hybrid</h4>
+<p class="text-sm text-slate-600 mt-1">Combines both. Proactive for local neighborhood, reactive for distant nodes. (e.g., ZRP)</p>
+</div>
+<div class="p-4 border border-l-4 border-l-yellow-500 rounded bg-white shadow-sm">
+<h4 class="font-bold text-slate-800">4. Flooding / Power-Aware</h4>
+<p class="text-sm text-slate-600 mt-1">Flooding blindly broadcasts to all. Power-aware protocols route data through nodes that have the highest remaining battery life to maximize network lifetime.</p>
+</div>
+</div>
+</div>
+`
+},
+{
+id: 'unit4',
+title: 'Unit 4: Applications of WSN',
+shortTitle: 'U4: Applications',
+intro: 'Explores real-world implementations. Highly focused on Healthcare (WBAN) and Machine learning integration. Prepare block diagrams for these architectures.',
+content: `
+<h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-indigo-100 pb-2">Applications of WSN</h2>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+<h3 class="text-xl font-semibold text-indigo-700 mb-4">1. Wireless Body Area Network (WBAN) for Healthcare</h3>
+<span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold uppercase tracking-wide mb-2">Expected 15 Mark Question</span>
+<p class="text-slate-700 mb-4">WBANs consist of tiny sensor nodes placed on, in, or around the human body to monitor physiological parameters.</p>
+
+<div class="bg-slate-50 p-6 rounded-lg border border-slate-200 mb-6">
+<h4 class="text-center font-bold text-slate-600 mb-4">Block Diagram: WBAN Structure & Methodology</h4>
+<div class="flex flex-col md:flex-row items-center justify-center gap-2 text-center text-sm">
+<div class="flex flex-col gap-2">
+<div class="bg-red-100 border border-red-300 p-2 rounded">ECG Sensor</div>
+<div class="bg-red-100 border border-red-300 p-2 rounded">Temp Sensor</div>
+<div class="bg-red-100 border border-red-300 p-2 rounded">SpO2 Sensor</div>
+</div>
+<div class="text-xl text-slate-400 font-bold px-2">&#8594;</div>
+<div class="bg-blue-100 border-2 border-blue-400 p-4 rounded-lg w-32 shadow-md">
+<h5 class="font-bold text-blue-800">Personal Device (PDA/Phone)</h5>
+<p class="text-xs mt-1">Aggregates Data (ZigBee/Bluetooth)</p>
+</div>
+<div class="text-xl text-slate-400 font-bold px-2">&#8594;</div>
+<div class="bg-gray-200 border-2 border-gray-400 p-4 rounded-lg w-28">
+<h5 class="font-bold text-gray-800">Internet / Wi-Fi</h5>
+</div>
+<div class="text-xl text-slate-400 font-bold px-2">&#8594;</div>
+<div class="bg-green-100 border-2 border-green-400 p-4 rounded-lg w-32 shadow-md">
+<h5 class="font-bold text-green-800">Medical Server</h5>
+<p class="text-xs mt-1">Doctors & Database</p>
+</div>
+</div>
+</div>
+<h4 class="font-bold text-slate-800 mb-2">Methodology & Components:</h4>
+<ul class="list-disc pl-6 space-y-1 text-slate-700">
+<li><b>Tier 1 (Intra-body):</b> Communication between bodily sensors and the personal coordinating device. Requires ultra-low power and high security.</li>
+<li><b>Tier 2 (Extra-body):</b> Communication from the personal device to the local access point (Internet gateway).</li>
+<li><b>Tier 3 (Beyond-body):</b> Data transmitted securely over the internet to medical databases for remote monitoring by healthcare professionals.</li>
+</ul>
+</div>
+
+<div class="grid md:grid-cols-2 gap-6">
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+<h3 class="text-xl font-semibold text-teal-700 mb-3">2. Machine Condition Monitoring (using ML)</h3>
+<p class="text-slate-700 text-sm mb-3">WSNs are placed on industrial machines to monitor vibrations, temperature, and acoustics. Instead of sending all raw data to the cloud, <b>Machine Learning algorithms</b> run locally (or at the edge) to detect anomalies.</p>
+<ul class="list-disc pl-5 text-slate-700 text-sm space-y-1">
+<li><b>Predictive Maintenance:</b> ML models predict when a machine will fail based on historical sensor data, reducing downtime.</li>
+<li><b>Techniques:</b> Support Vector Machines (SVM), Neural Networks for classification of normal vs. faulty states.</li>
+</ul>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+<h3 class="text-xl font-semibold text-purple-700 mb-3">3. Fog based IoT for Stress Monitoring</h3>
+<p class="text-slate-700 text-sm mb-3">Fog computing pushes processing closer to the edge (sensors) rather than sending everything to the distant Cloud. This reduces latency, critical for real-time health alerts.</p>
+<ul class="list-disc pl-5 text-slate-700 text-sm space-y-1">
+<li><b>Scenario:</b> Wearables detect high heart rate and galvanic skin response (stress indicators).</li>
+<li><b>Fog Layer:</b> A local smart gateway processes this data instantly, triggering a local alert or soothing mechanism without waiting for cloud processing.</li>
+</ul>
+</div>
+</div>
+`
+},
+{
+id: 'unit5',
+title: 'Unit 5: Case Studies',
+shortTitle: 'U5: Case Studies',
+intro: 'In-depth look at specific implementations. You must understand the specific challenges of these environments (Agriculture vs. Underwater) and how WSN solves them.',
+content: `
+<h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-indigo-100 pb-2">Case Studies</h2>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8 border-l-4 border-l-green-500">
+<h3 class="text-xl font-semibold text-green-800 mb-4">Case Study 1: Smart Agriculture Monitoring</h3>
+<span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold uppercase tracking-wide mb-3">Precision Farming Application</span>
+<p class="text-slate-700 mb-4">Using WSNs to optimize crop yield and minimize resource usage (water, fertilizer).</p>
+
+<div class="grid md:grid-cols-2 gap-6">
+<div>
+<h4 class="font-bold text-slate-800 mb-2">Sensor Types Used:</h4>
+<ul class="list-disc pl-5 text-sm text-slate-700 space-y-1">
+<li>Soil Moisture Sensors (to automate irrigation).</li>
+<li>Temperature & Humidity Sensors (micro-climate monitoring).</li>
+<li>Light sensors (for photosynthesis tracking).</li>
+<li>NPK Sensors (Soil nutrient levels).</li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 mb-2">System Architecture:</h4>
+<ul class="list-disc pl-5 text-sm text-slate-700 space-y-1">
+<li>Nodes scattered across the field form a multi-hop mesh network.</li>
+<li>Data reaches a localized Gateway (often solar-powered).</li>
+<li>Gateway uses GSM/LoRa to send data to agricultural cloud platforms.</li>
+<li>Farmers receive alerts/dashboards on their smartphones.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-blue-500">
+<h3 class="text-xl font-semibold text-blue-800 mb-4">Case Study 2: Underwater WSN (UWSN) & Link Estimation</h3>
+<span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded font-bold uppercase tracking-wide mb-3">Complex Environment Application</span>
+<p class="text-slate-700 mb-4">UWSNs are used for oceanographic data collection, pollution monitoring, and offshore exploration. They fundamentally differ from terrestrial WSNs.</p>
+
+<div class="bg-slate-50 p-4 rounded border border-slate-200 mb-4">
+<h4 class="font-bold text-slate-800 mb-2">The Major Challenge: Acoustic Channels</h4>
+<p class="text-sm text-slate-700">Radio waves (RF) attenuate rapidly in water. Therefore, UWSNs use <b>Acoustic signals (sound)</b>. Acoustic waves have high propagation delay (speed of sound in water is ~1500m/s vs speed of light for RF), low bandwidth, and suffer from high multipath fading and Doppler spread.</p>
+</div>
+
+<h4 class="font-bold text-slate-800 mb-2">Evaluation of Link Estimation & Channel-Aware Routing:</h4>
+<ul class="list-disc pl-6 text-sm text-slate-700 space-y-2">
+<li>Because the underwater channel changes rapidly (water currents, temperature gradients), static routing fails.</li>
+<li><b>Link Estimation:</b> Nodes must constantly measure the quality of the link to their neighbors (e.g., using Expected Transmission Count - ETX).</li>
+<li><b>Channel-Aware Routing:</b> The routing protocol uses these link estimates to dynamically select the most stable path, avoiding nodes with poor acoustic connections to prevent packet loss and save energy.</li>
+</ul>
+</div>
+`
+}
+];
+
+let energyChartInstance = null;
+
+function renderNav() {
+const navList = document.getElementById('nav-list');
+syllabusData.forEach((unit, index) => {
+const li = document.createElement('li');
+li.innerHTML = `
+<button onclick="loadUnit('${unit.id}')" class="w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 flex items-center justify-between ${index === 0 ? 'bg-indigo-700 text-white font-medium' : 'text-indigo-100 hover:bg-indigo-800'}" id="nav-btn-${unit.id}">
+<span>${unit.shortTitle}</span>
+<span class="text-xs bg-indigo-900 px-2 py-1 rounded-full border border-indigo-700">View</span>
+</button>
+`;
+navList.appendChild(li);
+});
+}
+
+function loadUnit(unitId) {
+document.querySelectorAll('[id^="nav-btn-"]').forEach(btn => {
+btn.classList.remove('bg-indigo-700', 'text-white', 'font-medium');
+btn.classList.add('text-indigo-100', 'hover:bg-indigo-800');
+});
+const activeBtn = document.getElementById(`nav-btn-${unitId}`);
+activeBtn.classList.add('bg-indigo-700', 'text-white', 'font-medium');
+activeBtn.classList.remove('text-indigo-100', 'hover:bg-indigo-800');
+
+const unit = syllabusData.find(u => u.id === unitId);
+const contentArea = document.getElementById('main-content');
+
+let html = `
+<div class="content-section active">
+<div class="bg-indigo-100 border-l-4 border-indigo-500 p-4 mb-8 rounded shadow-sm">
+<p class="text-indigo-800 italic"><strong>Unit Overview:</strong> ${unit.intro}</p>
+</div>
+${unit.content}
+</div>
+`;
+contentArea.innerHTML = html;
+
+if (unitId === 'unit2') {
+initChart();
+} else if (energyChartInstance) {
+energyChartInstance.destroy();
+energyChartInstance = null;
+}
+
+window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function initChart() {
+const ctx = document.getElementById('energyChart');
+if (!ctx) return;
+
+if (energyChartInstance) {
+energyChartInstance.destroy();
+}
+
+energyChartInstance = new Chart(ctx, {
+type: 'doughnut',
+data: {
+labels: ['Communication (Transceiver)', 'Sensing', 'Processing (CPU)', 'Idle/Leakage'],
+datasets: [{
+data: [65, 15, 10, 10],
+backgroundColor: [
+'rgba(99, 102, 241, 0.8)', // Indigo
+'rgba(234, 179, 8, 0.8)',  // Yellow
+'rgba(168, 85, 247, 0.8)', // Purple
+'rgba(148, 163, 184, 0.8)' // Slate
+],
+borderWidth: 1
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: { position: 'bottom', labels: { boxWidth: 12, padding: 10, font: { size: 11 } } },
+tooltip: {
+callbacks: {
+label: function(context) {
+return ' ' + context.label + ': ~' + context.parsed + '%';
+}
+}
+}
+},
+cutout: '60%'
+}
+});
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+renderNav();
+loadUnit('unit1'); 
+});
+
+</script>
 </body>
 </html>
-
