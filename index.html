@@ -340,6 +340,7 @@
       <a href="#unit1" class="text-sm text-gray-400 hover:text-white transition-colors">Parallel Processing</a>
       <a href="#unit2" class="text-sm text-gray-400 hover:text-white transition-colors">OpenMP & MPI</a>
       <a href="#unit3" class="text-sm text-gray-400 hover:text-white transition-colors">CUDA</a>
+      <a href="#recall" class="text-sm text-gray-400 hover:text-white transition-colors">Recall</a>
     </div>
     <button id="menuBtn" class="md:hidden text-white">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -612,6 +613,98 @@
       </div>
     </div>
   </div>
+
+    <!-- Hierarchical Systems -->
+    <div class="scroll-section bento-card p-8 md:p-12 mt-6">
+      <span class="tag bg-indigo-500/10 text-indigo-400 mb-6 inline-block">2-Mark / 10-Mark</span>
+      <h3 class="headline text-white mb-4">Hierarchical Systems</h3>
+      <p class="body-text mb-6">Modern HPC combines shared and distributed memory inside one system. Each node has multicore shared memory internally; nodes are connected via distributed memory externally.</p>
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-transparent border border-indigo-500/10 mb-6">
+        <div class="text-center font-mono text-sm text-[#86868b] leading-relaxed">
+          <div class="text-white font-bold mb-2">Cluster</div>
+          <div>├── Node 1 (multicore — OpenMP)</div>
+          <div>├── Node 2 (multicore — OpenMP)</div>
+          <div>└── Node 3 (multicore — OpenMP)</div>
+          <div class="mt-2 text-indigo-400">Between nodes: MPI</div>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="p-4 rounded-xl bg-white/[0.03] text-center">
+          <span class="text-white font-semibold text-sm">Scalable</span>
+          <p class="text-[#86868b] text-xs mt-1">Add nodes as needed</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] text-center">
+          <span class="text-white font-semibold text-sm">High Performance</span>
+          <p class="text-[#86868b] text-xs mt-1">Best of both architectures</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] text-center">
+          <span class="text-white font-semibold text-sm">Efficient</span>
+          <p class="text-[#86868b] text-xs mt-1">Optimal resource usage</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interconnection Networks -->
+    <div class="scroll-section bento-card p-8 md:p-12 mt-6">
+      <span class="tag bg-teal-500/10 text-teal-400 mb-6 inline-block">2-Mark Expected</span>
+      <h3 class="headline text-white mb-4">Interconnection Networks</h3>
+      <p class="body-text mb-6">Networks connect processors for communication. Network latency directly affects parallel performance.</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="bento-card p-6 bg-[#0d0d0d]">
+          <h4 class="text-lg font-bold text-blue-400 mb-2">Bus Network</h4>
+          <p class="text-[#86868b] text-sm">Single shared communication line.</p>
+          <div class="mt-3 flex gap-2 text-xs">
+            <span class="px-2 py-1 rounded bg-green-500/10 text-green-400">Simple</span>
+            <span class="px-2 py-1 rounded bg-red-500/10 text-red-400">Contention</span>
+          </div>
+        </div>
+        <div class="bento-card p-6 bg-[#0d0d0d]">
+          <h4 class="text-lg font-bold text-purple-400 mb-2">Ring Network</h4>
+          <p class="text-[#86868b] text-sm">Processors connected in a closed loop. Data travels around the ring.</p>
+          <div class="mt-3 text-xs text-[#86868b]">P1 → P2 → P3 → P4 → P1</div>
+        </div>
+        <div class="bento-card p-6 bg-[#0d0d0d]">
+          <h4 class="text-lg font-bold text-teal-400 mb-2">Mesh Network</h4>
+          <p class="text-[#86868b] text-sm">Processors arranged in a 2D/3D grid. Used in supercomputers.</p>
+          <div class="mt-3 text-xs text-[#86868b]">Each processor connects to nearest neighbors</div>
+        </div>
+        <div class="bento-card p-6 bg-[#0d0d0d]">
+          <h4 class="text-lg font-bold text-orange-400 mb-2">Star Network</h4>
+          <p class="text-[#86868b] text-sm">Central node controls all communication. Simple but single point of failure.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Basics of Parallelization -->
+    <div class="scroll-section bento-card p-8 md:p-12 mt-6">
+      <span class="tag bg-green-500/10 text-green-400 mb-6 inline-block">Fundamental</span>
+      <h3 class="headline text-white mb-4">Basics of Parallelization</h3>
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <h4 class="text-white font-semibold mb-3">4 Steps</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-bold">1</div><span class="text-[#86868b]">Divide the problem into sub-problems</span></div>
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-bold">2</div><span class="text-[#86868b]">Assign tasks to processors</span></div>
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-bold">3</div><span class="text-[#86868b]">Execute simultaneously</span></div>
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-bold">4</div><span class="text-[#86868b]">Combine results</span></div>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-3">Types of Parallelism</h4>
+          <div class="space-y-3">
+            <div class="p-4 rounded-xl bg-white/[0.03]">
+              <span class="text-white font-semibold text-sm">Task Parallelism</span>
+              <p class="text-[#86868b] text-xs mt-1">Different tasks executed simultaneously on different processors.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-white/[0.03]">
+              <span class="text-white font-semibold text-sm">Data Parallelism</span>
+              <p class="text-[#86868b] text-xs mt-1">Same task applied to different data elements simultaneously.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </section>
 
 <div class="divider max-w-6xl mx-auto"></div>
@@ -878,6 +971,120 @@
       </div>
     </div>
   </div>
+
+    <!-- OpenMP Tasking -->
+    <div class="scroll-section bento-card p-8 md:p-12 mt-6">
+      <span class="tag bg-blue-500/10 text-blue-400 mb-6 inline-block">Advanced OpenMP</span>
+      <h3 class="headline text-white mb-4">OpenMP Tasking</h3>
+      <p class="body-text mb-6">Used for irregular, recursive, or dynamic workloads where simple <code class="text-blue-400">for</code> loops don't work — like linked lists, trees, or recursive functions.</p>
+      <div class="code-block mb-6">
+<span class="pp">#pragma omp task</span>
+{
+    <span class="fn">work</span>();  <span class="cm">// Each task executed by available thread</span>
+}
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="p-5 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-2">When to Use</h4>
+          <div class="space-y-1 text-sm text-[#86868b]">
+            <div>• Linked list traversal</div>
+            <div>• Recursive divide-and-conquer</div>
+            <div>• Irregular loop bounds</div>
+            <div>• Dynamic workload generation</div>
+          </div>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-2">Advantage</h4>
+          <p class="text-[#86868b] text-sm">Better load balancing — threads grab tasks dynamically instead of pre-divided chunks.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wavefront Parallelization -->
+    <div class="scroll-section bento-card p-8 md:p-12 mt-6">
+      <span class="tag bg-purple-500/10 text-purple-400 mb-6 inline-block">Very Important Theory</span>
+      <h3 class="headline text-white mb-4">Wavefront Parallelization</h3>
+      <p class="body-text mb-6">Used when a loop has data dependencies — calculating a cell requires the cell to its left and top. You parallelize execution along the <span class="text-white font-semibold">diagonal</span> (wavefront) because diagonal cells don't depend on each other.</p>
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-purple-500/5 to-transparent border border-purple-500/10 mb-6">
+        <div class="text-center font-mono text-sm text-[#86868b] leading-loose">
+          <div><span class="text-purple-400">1</span> 2 3 4 5</div>
+          <div>2 <span class="text-purple-400">3</span> 4 5 6</div>
+          <div>3 4 <span class="text-purple-400">5</span> 6 7</div>
+          <div>4 5 6 <span class="text-purple-400">7</span> 8</div>
+          <div class="mt-2 text-purple-400 text-xs">Diagonal elements processed together in parallel</div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <span class="tag bg-white/5 text-[#86868b] border border-white/5">Dynamic Programming</span>
+        <span class="tag bg-white/5 text-[#86868b] border border-white/5">Image Processing</span>
+        <span class="tag bg-white/5 text-[#86868b] border border-white/5">Matrix Algorithms</span>
+      </div>
+    </div>
+
+    <!-- Profiling OpenMP -->
+    <div class="scroll-section bento-card p-8 md:p-12 mt-6">
+      <span class="tag bg-orange-500/10 text-orange-400 mb-6 inline-block">Performance Analysis</span>
+      <h3 class="headline text-white mb-4">Profiling OpenMP Programs</h3>
+      <p class="body-text mb-6">Profiling measures execution time, identifies bottlenecks, and analyzes thread performance to optimize parallel code.</p>
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <div class="p-5 rounded-2xl bg-white/[0.03] text-center">
+          <div class="text-2xl mb-2">📊</div>
+          <span class="text-white font-semibold text-sm">gprof</span>
+          <p class="text-[#86868b] text-xs mt-1">GNU profiler — function-level timing</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03] text-center">
+          <div class="text-2xl mb-2">🔬</div>
+          <span class="text-white font-semibold text-sm">Intel VTune</span>
+          <p class="text-[#86868b] text-xs mt-1">Advanced thread & memory analysis</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03] text-center">
+          <div class="text-2xl mb-2">⚡</div>
+          <span class="text-white font-semibold text-sm">perf</span>
+          <p class="text-[#86868b] text-xs mt-1">Linux profiler — hardware counters</p>
+        </div>
+      </div>
+      <div class="p-5 rounded-2xl bg-gradient-to-r from-orange-500/5 to-transparent border border-orange-500/10">
+        <h4 class="text-white font-semibold mb-2">Key Metrics</h4>
+        <div class="grid grid-cols-3 gap-4 text-sm text-[#86868b]">
+          <div><span class="text-white">CPU Utilization</span></div>
+          <div><span class="text-white">Sync Overhead</span></div>
+          <div><span class="text-white">Load Imbalance</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MPI Performance Properties -->
+    <div class="scroll-section bento-card p-8 md:p-12 mt-6">
+      <span class="tag bg-teal-500/10 text-teal-400 mb-6 inline-block">Expected 2-Mark / 10-Mark</span>
+      <h3 class="headline text-white mb-4">MPI Performance Properties</h3>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="p-5 rounded-2xl bg-white/[0.03]">
+          <span class="text-white font-semibold text-sm">Latency</span>
+          <p class="text-[#86868b] text-xs mt-1">Delay before transmission starts. Lower is better.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03]">
+          <span class="text-white font-semibold text-sm">Bandwidth</span>
+          <p class="text-[#86868b] text-xs mt-1">Amount of data transferred per second. Higher is better.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03]">
+          <span class="text-white font-semibold text-sm">Communication Overhead</span>
+          <p class="text-[#86868b] text-xs mt-1">Cost of message passing — packing, sending, unpacking.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03]">
+          <span class="text-white font-semibold text-sm">Scalability</span>
+          <p class="text-[#86868b] text-xs mt-1">Performance increase proportional to added processors.</p>
+        </div>
+      </div>
+      <div class="mt-6 p-5 rounded-2xl bg-gradient-to-br from-teal-500/5 to-transparent border border-teal-500/10">
+        <h4 class="text-teal-400 font-semibold mb-2">Message Transfer Time</h4>
+        <div class="formula-box mb-3">
+          <div class="label">Transfer Time Formula</div>
+          <div>T = L + m/B</div>
+        </div>
+        <p class="text-[#86868b] text-sm">Where L = latency, m = message size, B = bandwidth. Minimizing communication volume is key to scaling.</p>
+      </div>
+    </div>
+
 </section>
 
 <div class="divider max-w-6xl mx-auto"></div>
@@ -1088,8 +1295,360 @@
       </div>
     </div>
   </div>
+
+    <!-- CUDA Performance Optimization -->
+    <div class="scroll-section bento-card p-8 md:p-12 mt-6">
+      <span class="tag bg-green-500/10 text-green-400 mb-6 inline-block">Very Important</span>
+      <h3 class="headline text-white mb-4">CUDA Performance Optimization</h3>
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="p-5 rounded-2xl bg-green-500/5 border border-green-500/10">
+          <h4 class="text-green-400 font-semibold mb-2">Memory Coalescing</h4>
+          <p class="text-[#86868b] text-sm">Consecutive threads accessing consecutive memory addresses. Hardware bundles them into one fast transaction.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-blue-500/5 border border-blue-500/10">
+          <h4 class="text-blue-400 font-semibold mb-2">Shared Memory Usage</h4>
+          <p class="text-[#86868b] text-sm">Pull data from slow Global Memory into fast Shared Memory, do all math, then write results back.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-orange-500/5 border border-orange-500/10">
+          <h4 class="text-orange-400 font-semibold mb-2">Reduce Divergence</h4>
+          <p class="text-[#86868b] text-sm">Avoid different if/else branches within a Warp (32 threads). Divergence forces sequential execution.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-purple-500/5 border border-purple-500/10">
+          <h4 class="text-purple-400 font-semibold mb-2">Occupancy</h4>
+          <p class="text-[#86868b] text-sm">Keep GPU cores busy. Maximize the ratio of active warps to maximum possible warps per SM.</p>
+        </div>
+      </div>
+      <div class="p-5 rounded-2xl bg-gradient-to-r from-green-500/5 to-transparent border border-green-500/10">
+        <h4 class="text-white font-semibold mb-2">Optimization Rule</h4>
+        <p class="text-[#86868b] text-sm">Move frequently used data from <span class="text-white">Global Memory</span> → <span class="text-blue-400">Shared Memory</span> → <span class="text-green-400">Registers</span>. Minimize global memory access.</p>
+      </div>
+    </div>
+
+    <!-- Data Compression & Regularization -->
+    <div class="scroll-section bento-card p-8 md:p-12 mt-6">
+      <span class="tag bg-indigo-500/10 text-indigo-400 mb-6 inline-block">Advanced</span>
+      <h3 class="headline text-white mb-4">Data Compression & Regularization</h3>
+      <p class="body-text mb-6">Sparse matrices are mostly zeros. Storing all zeros wastes GPU memory. We compress them using <span class="text-white font-semibold">CSR (Compressed Sparse Row)</span> format.</p>
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <div class="p-5 rounded-2xl bg-white/[0.03] text-center">
+          <span class="text-white font-bold text-lg">values[]</span>
+          <p class="text-[#86868b] text-xs mt-2">Array of all non-zero values only</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03] text-center">
+          <span class="text-white font-bold text-lg">col_idx[]</span>
+          <p class="text-[#86868b] text-xs mt-2">Column index for each non-zero value</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03] text-center">
+          <span class="text-white font-bold text-lg">row_ptr[]</span>
+          <p class="text-[#86868b] text-xs mt-2">Starting index of each row in values[]</p>
+        </div>
+      </div>
+      <div class="p-5 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-transparent border border-indigo-500/10">
+        <h4 class="text-indigo-400 font-semibold mb-2">Regularization</h4>
+        <p class="text-[#86868b] text-sm">Threads inside a Warp should execute <span class="text-white">same instructions</span> at the same time. Avoid branch divergence. Organize data so memory access is coalesced and load balancing is equal.</p>
+      </div>
+    </div>
+
+    <!-- Parallel Programming Thinking -->
+    <div class="scroll-section bento-card p-8 md:p-12 mt-6">
+      <span class="tag bg-pink-500/10 text-pink-400 mb-6 inline-block">Mindset</span>
+      <h3 class="headline text-white mb-4">Parallel Programming & Computational Thinking</h3>
+      <p class="body-text mb-6">The mindset shift from "how do I loop through this array?" to "if I have 10,000 threads, what exactly is thread ID #4242 responsible for computing?"</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="p-5 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-3">Key Considerations</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-start gap-2"><span class="text-pink-400 mt-0.5">•</span><span class="text-[#86868b]"><span class="text-white">Data Dependency</span> — tasks depend on others</span></div>
+            <div class="flex items-start gap-2"><span class="text-pink-400 mt-0.5">•</span><span class="text-[#86868b]"><span class="text-white">Synchronization</span> — coordinate threads</span></div>
+            <div class="flex items-start gap-2"><span class="text-pink-400 mt-0.5">•</span><span class="text-[#86868b]"><span class="text-white">Load Balancing</span> — equal work distribution</span></div>
+            <div class="flex items-start gap-2"><span class="text-pink-400 mt-0.5">•</span><span class="text-[#86868b]"><span class="text-white">Communication Cost</span> — minimize data transfer</span></div>
+          </div>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-3">Main Idea</h4>
+          <p class="text-[#86868b] text-sm">Break large problems into <span class="text-white">independent smaller tasks</span>. Each task should be self-contained with minimal dependency on other tasks.</p>
+        </div>
+      </div>
+    </div>
+
 </section>
 
+
+<!-- ==================== NIGHT BEFORE EXAM ==================== -->
+<section id="recall" class="section-pad relative">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="scroll-section mb-4"><span class="caption text-[#86868b]">Night Before Exam</span></div>
+    <h2 class="scroll-section display-lg mb-6 max-w-3xl">Complete<br><span class="gradient-text-warm">Recall Sheet.</span></h2>
+    <p class="scroll-section body-text max-w-2xl mb-20">One-shot revision. Read this the night before and the morning of your exam.</p>
+
+    <!-- Recall Unit 1 -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-blue-500/10 text-blue-400 mb-6 inline-block">Unit 1 Recall</span>
+      <h3 class="headline text-white mb-6">Parallel Processing — Quick Recall</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Stored Program Architecture</span>
+            <p class="text-[#86868b] text-xs mt-1">Instructions + data in same memory. Von Neumann. Fetch-decode-execute.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Memory Hierarchy</span>
+            <p class="text-[#86868b] text-xs mt-1">Registers → L1 → L2 → L3 → RAM → Storage. Speed ↓, Capacity ↑.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Locality</span>
+            <p class="text-[#86868b] text-xs mt-1">Temporal = reuse recent data. Spatial = access nearby data.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Flynn's Taxonomy</span>
+            <p class="text-[#86868b] text-xs mt-1">SISD (normal), SIMD (GPU), MISD (rare), MIMD (multicore).</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Shared Memory</span>
+            <p class="text-[#86868b] text-xs mt-1">Common memory, shared variables, OpenMP, limited scalability.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Distributed Memory</span>
+            <p class="text-[#86868b] text-xs mt-1">Separate local memory, message passing, MPI, highly scalable.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Amdahl's Law</span>
+            <p class="text-[#86868b] text-xs mt-1">S = 1/[(1−P)+P/N]. Fixed workload. Serial part is bottleneck.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Gustafson's Law</span>
+            <p class="text-[#86868b] text-xs mt-1">S = N − α(N−1). Scaled workload. Problem grows with processors.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recall Unit 2 -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-teal-500/10 text-teal-400 mb-6 inline-block">Unit 2 Recall</span>
+      <h3 class="headline text-white mb-6">OpenMP & MPI — Quick Recall</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h4 class="text-blue-400 font-semibold mb-3">OpenMP</h4>
+          <div class="space-y-2 text-sm">
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Fork-Join:</span> <span class="text-[#86868b]">Master → workers → join</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Directives:</span> <span class="text-[#86868b]">parallel, parallel for, critical, barrier</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Reduction:</span> <span class="text-[#86868b]">reduction(+:sum)</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Scheduling:</span> <span class="text-[#86868b]">static, dynamic, guided</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Tasking:</span> <span class="text-[#86868b]">#pragma omp task</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Wavefront:</span> <span class="text-[#86868b]">Diagonal execution for dependencies</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Jacobi:</span> <span class="text-[#86868b]">x_i = (b_i − Σa_ij·x_j)/a_ii</span></div>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-teal-400 font-semibold mb-3">MPI</h4>
+          <div class="space-y-2 text-sm">
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Init:</span> <span class="text-[#86868b]">MPI_Init, MPI_Comm_rank, MPI_Comm_size</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Point-to-Point:</span> <span class="text-[#86868b]">MPI_Send, MPI_Recv</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Non-Blocking:</span> <span class="text-[#86868b]">MPI_Isend, MPI_Irecv</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Collective:</span> <span class="text-[#86868b]">Bcast, Scatter, Gather, Reduce</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Ghost Cells:</span> <span class="text-[#86868b]">Halo exchange in Jacobi MPI</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Transfer Time:</span> <span class="text-[#86868b]">T = L + m/B</span></div>
+            <div class="p-3 rounded-xl bg-white/[0.03]"><span class="text-white">Topology:</span> <span class="text-[#86868b]">MPI_Cart_create for logical grids</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recall Unit 3 -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-purple-500/10 text-purple-400 mb-6 inline-block">Unit 3 Recall</span>
+      <h3 class="headline text-white mb-6">CUDA — Quick Recall</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">GPU</span>
+            <p class="text-[#86868b] text-xs mt-1">Thousands of lightweight cores. SIMT architecture.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Hierarchy</span>
+            <p class="text-[#86868b] text-xs mt-1">Grid → Blocks → Threads. Block max 1024 threads.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Kernel</span>
+            <p class="text-[#86868b] text-xs mt-1">__global__ function. Launched with <<<blocks, threads>>>.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Memory</span>
+            <p class="text-[#86868b] text-xs mt-1">Registers (fastest) → Shared (fast) → Global (slow).</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Coalescing</span>
+            <p class="text-[#86868b] text-xs mt-1">Consecutive threads → consecutive addresses = one transaction.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Branch Divergence</span>
+            <p class="text-[#86868b] text-xs mt-1">Warp threads taking different paths = sequential execution.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Sparse Matrix</span>
+            <p class="text-[#86868b] text-xs mt-1">CSR: values[], col_idx[], row_ptr[]. Store only non-zeros.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Dynamic Parallelism</span>
+            <p class="text-[#86868b] text-xs mt-1">GPU thread launches new kernels. No CPU needed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Most Important Programs -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-red-500/10 text-red-400 mb-6 inline-block">Memorize These</span>
+      <h3 class="headline text-white mb-6">Most Important Programs</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/10">
+          <h4 class="text-blue-400 font-bold mb-3">OpenMP</h4>
+          <div class="space-y-2 text-sm text-[#86868b]">
+            <div>1. Hello World</div>
+            <div>2. Parallel for loop</div>
+            <div>3. Reduction sum</div>
+            <div>4. Jacobi iteration</div>
+          </div>
+        </div>
+        <div class="p-6 rounded-2xl bg-teal-500/5 border border-teal-500/10">
+          <h4 class="text-teal-400 font-bold mb-3">MPI</h4>
+          <div class="space-y-2 text-sm text-[#86868b]">
+            <div>1. Hello World</div>
+            <div>2. MPI_Send / MPI_Recv</div>
+            <div>3. MPI_Bcast</div>
+            <div>4. MPI_Reduce</div>
+          </div>
+        </div>
+        <div class="p-6 rounded-2xl bg-purple-500/5 border border-purple-500/10">
+          <h4 class="text-purple-400 font-bold mb-3">CUDA</h4>
+          <div class="space-y-2 text-sm text-[#86868b]">
+            <div>1. Hello World</div>
+            <div>2. Vector addition</div>
+            <div>3. Matrix addition</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10-Mark Questions -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-orange-500/10 text-orange-400 mb-6 inline-block">Highest Probability</span>
+      <h3 class="headline text-white mb-6">Most Important 10-Mark Questions</h3>
+      <div class="grid md:grid-cols-2 gap-3">
+        <div class="p-4 rounded-xl bg-white/[0.03] flex items-center gap-3">
+          <span class="text-orange-400 font-bold">1</span>
+          <span class="text-[#86868b] text-sm">Amdahl's Law vs Gustafson's Law</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] flex items-center gap-3">
+          <span class="text-orange-400 font-bold">2</span>
+          <span class="text-[#86868b] text-sm">Shared vs Distributed Memory</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] flex items-center gap-3">
+          <span class="text-orange-400 font-bold">3</span>
+          <span class="text-[#86868b] text-sm">OpenMP Fork-Join Model & Directives</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] flex items-center gap-3">
+          <span class="text-orange-400 font-bold">4</span>
+          <span class="text-[#86868b] text-sm">MPI Communication (Point-to-Point & Collective)</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] flex items-center gap-3">
+          <span class="text-orange-400 font-bold">5</span>
+          <span class="text-[#86868b] text-sm">CUDA Execution Hierarchy</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] flex items-center gap-3">
+          <span class="text-orange-400 font-bold">6</span>
+          <span class="text-[#86868b] text-sm">Jacobi Parallelization (OpenMP & MPI)</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] flex items-center gap-3">
+          <span class="text-orange-400 font-bold">7</span>
+          <span class="text-[#86868b] text-sm">Memory Hierarchy & Locality</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] flex items-center gap-3">
+          <span class="text-orange-400 font-bold">8</span>
+          <span class="text-[#86868b] text-sm">Sparse Matrix Computation (CSR)</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] flex items-center gap-3">
+          <span class="text-orange-400 font-bold">9</span>
+          <span class="text-[#86868b] text-sm">MPI Virtual Topology & Ghost Cells</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.03] flex items-center gap-3">
+          <span class="text-orange-400 font-bold">10</span>
+          <span class="text-[#86868b] text-sm">CUDA Memory Optimization</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Do Not Skip -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6 border-l-4 border-l-green-500">
+      <span class="tag bg-green-500/10 text-green-400 mb-6 inline-block">Critical Checklist</span>
+      <h3 class="headline text-green-400 mb-6">Do Not Skip These</h3>
+      <div class="grid md:grid-cols-2 gap-3">
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/10">
+          <span class="text-green-400 text-lg">✓</span>
+          <span class="text-white text-sm">Jacobi iteration formula + code</span>
+        </div>
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/10">
+          <span class="text-green-400 text-lg">✓</span>
+          <span class="text-white text-sm">MPI_Send / MPI_Recv syntax</span>
+        </div>
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/10">
+          <span class="text-green-400 text-lg">✓</span>
+          <span class="text-white text-sm">CUDA matrix addition program</span>
+        </div>
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/10">
+          <span class="text-green-400 text-lg">✓</span>
+          <span class="text-white text-sm">OpenMP reduction directive</span>
+        </div>
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/10">
+          <span class="text-green-400 text-lg">✓</span>
+          <span class="text-white text-sm">Amdahl vs Gustafson comparison</span>
+        </div>
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/10">
+          <span class="text-green-400 text-lg">✓</span>
+          <span class="text-white text-sm">Shared vs Distributed memory table</span>
+        </div>
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/10">
+          <span class="text-green-400 text-lg">✓</span>
+          <span class="text-white text-sm">CUDA hierarchy: Grid → Block → Thread</span>
+        </div>
+        <div class="flex items-center gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/10">
+          <span class="text-green-400 text-lg">✓</span>
+          <span class="text-white text-sm">Message transfer formula T = L + m/B</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exam Strategy -->
+    <div class="scroll-section bento-card p-8 md:p-12">
+      <span class="tag bg-blue-500/10 text-blue-400 mb-6 inline-block">Final Strategy</span>
+      <h3 class="headline text-white mb-6">Exam Strategy</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl bg-gradient-to-b from-blue-500/5 to-transparent border border-blue-500/10">
+          <div class="text-2xl font-bold text-blue-400 mb-2">1st</div>
+          <h4 class="text-white font-semibold mb-2">Read Recall Sheet</h4>
+          <p class="text-[#86868b] text-sm">Go through the quick recall cards above. Refresh all formulas and definitions.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-gradient-to-b from-teal-500/5 to-transparent border border-teal-500/10">
+          <div class="text-2xl font-bold text-teal-400 mb-2">2nd</div>
+          <h4 class="text-white font-semibold mb-2">Review Programs</h4>
+          <p class="text-[#86868b] text-sm">Skim the OpenMP, MPI, and CUDA code blocks. Focus on syntax and structure.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-gradient-to-b from-purple-500/5 to-transparent border border-purple-500/10">
+          <div class="text-2xl font-bold text-purple-400 mb-2">3rd</div>
+          <h4 class="text-white font-semibold mb-2">Case Studies</h4>
+          <p class="text-[#86868b] text-sm">Read Jacobi, Sparse Matrix, and Application case studies. Understand the approach.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider max-w-6xl mx-auto"></div>
 <!-- ==================== FOOTER ==================== -->
 <footer class="section-pad border-t border-white/5">
   <div class="max-w-6xl mx-auto px-6 text-center">
@@ -1101,7 +1660,7 @@
       <a href="#unit2" class="px-5 py-2.5 rounded-full bg-white/5 text-[#86868b] text-sm hover:bg-white/10 hover:text-white transition-all">OpenMP & MPI</a>
       <a href="#unit3" class="px-5 py-2.5 rounded-full bg-white/5 text-[#86868b] text-sm hover:bg-white/10 hover:text-white transition-all">CUDA</a>
     </div>
-    <p class="text-[#86868b] text-sm">From Team8❤️</p>
+    <p class="text-[#86868b] text-sm">Team8❤️ from Adengapa aaru peru6️⃣</p>
   </div>
 </footer>
 
