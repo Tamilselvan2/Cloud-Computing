@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SSN Exam Prep — 20E12E38</title>
+<title>HPC Exam Prep — 20CS257</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -45,10 +44,8 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Custom Scrollbar */
   ::-webkit-scrollbar { width: 0px; }
 
-  /* Apple-style Typography */
   .display-xl {
     font-size: clamp(48px, 8vw, 96px);
     font-weight: 800;
@@ -91,7 +88,6 @@
     text-transform: uppercase;
   }
 
-  /* Gradients */
   .gradient-text {
     background: linear-gradient(135deg, #f5f5f7 0%, #86868b 100%);
     -webkit-background-clip: text;
@@ -120,7 +116,6 @@
     background-clip: text;
   }
 
-  /* Cards */
   .bento-card {
     background: var(--bg-elevated);
     border-radius: 24px;
@@ -147,7 +142,6 @@
     pointer-events: none;
   }
 
-  /* Buttons */
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -190,18 +184,15 @@
     border-color: rgba(41, 151, 255, 0.5);
   }
 
-  /* Navigation */
   .nav-blur {
     background: rgba(0, 0, 0, 0.72);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
   }
 
-  /* Section Spacing */
   .section-pad { padding: 120px 0; }
   @media (max-width: 768px) { .section-pad { padding: 80px 0; } }
 
-  /* Canvas Background */
   #hero-canvas {
     position: absolute;
     top: 0;
@@ -212,22 +203,11 @@
     opacity: 0.6;
   }
 
-  /* Glow Orbs */
-  .glow-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.4;
-    pointer-events: none;
-  }
-
-  /* Horizontal Scroll Container */
   .scroll-section {
     opacity: 0;
     transform: translateY(40px);
   }
 
-  /* Table */
   .apple-table {
     width: 100%;
     border-collapse: collapse;
@@ -252,16 +232,9 @@
   }
 
   .apple-table tr:last-child td { border-bottom: none; }
+  .apple-table tr { transition: background 0.3s ease; }
+  .apple-table tr:hover { background: rgba(255,255,255,0.02); }
 
-  .apple-table tr {
-    transition: background 0.3s ease;
-  }
-
-  .apple-table tr:hover {
-    background: rgba(255,255,255,0.02);
-  }
-
-  /* Tag */
   .tag {
     display: inline-block;
     padding: 6px 14px;
@@ -271,17 +244,13 @@
     letter-spacing: 0.02em;
   }
 
-  /* Mobile Menu */
   .mobile-sheet {
     transform: translateY(100%);
     transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
   }
 
-  .mobile-sheet.open {
-    transform: translateY(0);
-  }
+  .mobile-sheet.open { transform: translateY(0); }
 
-  /* Progress */
   .progress-track {
     position: fixed;
     top: 0;
@@ -299,13 +268,6 @@
     transition: width 0.1s linear;
   }
 
-  /* Stagger children */
-  .stagger-children > * {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  /* Image/Icon containers */
   .icon-box {
     width: 48px;
     height: 48px;
@@ -316,24 +278,49 @@
     font-size: 20px;
   }
 
-  /* Divider */
   .divider {
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
   }
 
-  /* Smooth image reveal */
-  .img-reveal {
-    overflow: hidden;
+  .code-block {
+    background: #0d0d0d;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 20px 24px;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    color: #d4d4d4;
+  }
+
+  .code-block .kw { color: #c586c0; }
+  .code-block .fn { color: #dcdcaa; }
+  .code-block .str { color: #ce9178; }
+  .code-block .num { color: #b5cea8; }
+  .code-block .cm { color: #6a9955; }
+  .code-block .pp { color: #569cd6; }
+  .code-block .tp { color: #4ec9b0; }
+
+  .formula-box {
+    background: linear-gradient(135deg, rgba(41,151,255,0.08), rgba(94,92,230,0.05));
+    border: 1px solid rgba(41,151,255,0.15);
     border-radius: 20px;
+    padding: 24px 28px;
+    font-family: 'SF Mono', Monaco, monospace;
+    font-size: 18px;
+    color: #f5f5f7;
+    text-align: center;
   }
 
-  .img-reveal img {
-    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-
-  .img-reveal:hover img {
-    transform: scale(1.05);
+  .formula-box .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #86868b;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
   }
 </style>
 <base target="_blank">
@@ -341,24 +328,18 @@
 
 <body>
 
-<!-- Progress Bar -->
-<div class="progress-track">
-  <div class="progress-fill" id="progressFill"></div>
-</div>
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
-<!-- Navigation -->
 <nav id="mainNav" class="fixed top-0 w-full z-50 transition-all duration-500 py-4">
   <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
     <a href="#" class="flex items-center gap-2">
-      <div class="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-bold text-sm">S</div>
-      <span class="font-semibold text-sm tracking-tight">SSN Exam Prep</span>
+      <div class="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-bold text-sm">H</div>
+      <span class="font-semibold text-sm tracking-tight">HPC Exam Prep</span>
     </a>
     <div class="hidden md:flex items-center gap-8">
-      <a href="#unit1" class="text-sm text-gray-400 hover:text-white transition-colors">Technology</a>
-      <a href="#unit2" class="text-sm text-gray-400 hover:text-white transition-colors">Architecture</a>
-      <a href="#unit3" class="text-sm text-gray-400 hover:text-white transition-colors">Protocols</a>
-      <a href="#unit4" class="text-sm text-gray-400 hover:text-white transition-colors">Applications</a>
-      <a href="#unit5" class="text-sm text-gray-400 hover:text-white transition-colors">Case Studies</a>
+      <a href="#unit1" class="text-sm text-gray-400 hover:text-white transition-colors">Parallel Processing</a>
+      <a href="#unit2" class="text-sm text-gray-400 hover:text-white transition-colors">OpenMP & MPI</a>
+      <a href="#unit3" class="text-sm text-gray-400 hover:text-white transition-colors">CUDA</a>
     </div>
     <button id="menuBtn" class="md:hidden text-white">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -366,61 +347,42 @@
   </div>
 </nav>
 
-<!-- Mobile Menu -->
 <div id="mobileOverlay" class="fixed inset-0 bg-black/80 backdrop-blur-xl z-40 hidden opacity-0 transition-opacity duration-300"></div>
 <div id="mobileSheet" class="mobile-sheet fixed bottom-0 left-0 right-0 bg-[#1a1a1a] rounded-t-3xl z-50 p-8 pb-12">
   <div class="w-12 h-1 bg-white/20 rounded-full mx-auto mb-8"></div>
   <div class="space-y-1">
-    <a href="#unit1" class="mobile-link block py-4 text-xl font-semibold border-b border-white/5">Wireless Sensor Technology</a>
-    <a href="#unit2" class="mobile-link block py-4 text-xl font-semibold border-b border-white/5">Ad Hoc & Sensor Networks</a>
-    <a href="#unit3" class="mobile-link block py-4 text-xl font-semibold border-b border-white/5">MAC & Routing Protocols</a>
-    <a href="#unit4" class="mobile-link block py-4 text-xl font-semibold border-b border-white/5">Applications of WSN</a>
-    <a href="#unit5" class="mobile-link block py-4 text-xl font-semibold">Case Studies</a>
+    <a href="#unit1" class="mobile-link block py-4 text-xl font-semibold border-b border-white/5">Parallel Processing</a>
+    <a href="#unit2" class="mobile-link block py-4 text-xl font-semibold border-b border-white/5">OpenMP & MPI</a>
+    <a href="#unit3" class="mobile-link block py-4 text-xl font-semibold">CUDA Programming</a>
   </div>
 </div>
 
 <!-- ==================== HERO ==================== -->
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
   <canvas id="hero-canvas"></canvas>
-
   <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]"></div>
   <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px]"></div>
 
   <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
     <div class="scroll-section" id="heroCaption">
-      <span class="caption text-[#86868b] mb-6 block">Course Code 20E12E38</span>
+      <span class="caption text-[#86868b] mb-6 block">Course Code 20CS257</span>
     </div>
     <h1 class="scroll-section display-xl mb-6" id="heroTitle">
-      Wireless Sensor<br>
-      <span class="gradient-text-blue">Networks.</span>
+      High Performance<br><span class="gradient-text-blue">Computing.</span>
     </h1>
     <p class="scroll-section body-text max-w-xl mx-auto mb-10" id="heroBody">
-      Everything you need for your SSN examination — from sensor node architecture to underwater WSN case studies. Designed for 3, 7, and 15-mark questions.
+      Complete exam preparation for HPC — Parallel Processing, OpenMP, MPI, and CUDA. Structured for 2-mark, 10-mark, and program-based questions.
     </p>
     <div class="scroll-section flex flex-wrap justify-center gap-4" id="heroButtons">
-      <a href="#unit1" class="btn-primary">
-        Start Studying
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="#unit3" class="btn-secondary">High-Yield Topics</a>
+      <a href="#unit1" class="btn-primary">Start Studying <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#unit2" class="btn-secondary">Programs & Code</a>
     </div>
-
     <div class="scroll-section mt-24 grid grid-cols-3 gap-8 max-w-md mx-auto" id="heroStats">
-      <div class="text-center">
-        <div class="display-md font-bold text-white">5</div>
-        <div class="text-xs text-[#86868b] mt-1">Units</div>
-      </div>
-      <div class="text-center">
-        <div class="display-md font-bold text-white">20+</div>
-        <div class="text-xs text-[#86868b] mt-1">Topics</div>
-      </div>
-      <div class="text-center">
-        <div class="display-md font-bold text-white">3/7/15</div>
-        <div class="text-xs text-[#86868b] mt-1">Marks</div>
-      </div>
+      <div class="text-center"><div class="display-md font-bold text-white">3</div><div class="text-xs text-[#86868b] mt-1">Units</div></div>
+      <div class="text-center"><div class="display-md font-bold text-white">30+</div><div class="text-xs text-[#86868b] mt-1">Topics</div></div>
+      <div class="text-center"><div class="display-md font-bold text-white">2/10</div><div class="text-xs text-[#86868b] mt-1">Marks</div></div>
     </div>
   </div>
-
   <div class="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[#86868b]"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
@@ -429,178 +391,222 @@
 <!-- ==================== UNIT 1 ==================== -->
 <section id="unit1" class="section-pad relative">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="scroll-section mb-4">
-      <span class="caption text-[#86868b]">Unit 01</span>
-    </div>
-    <h2 class="scroll-section display-lg mb-6 max-w-3xl">
-      Wireless Sensor<br><span class="gradient-text">Technology.</span>
-    </h2>
-    <p class="scroll-section body-text max-w-2xl mb-20">
-      The foundational building blocks of WSN — hardware, software, environments, and communication channels. Focus on node architecture for 7/15 marks.
-    </p>
+    <div class="scroll-section mb-4"><span class="caption text-[#86868b]">Unit 01</span></div>
+    <h2 class="scroll-section display-lg mb-6 max-w-3xl">Parallel<br><span class="gradient-text">Processing.</span></h2>
+    <p class="scroll-section body-text max-w-2xl mb-20">Modern processors, memory hierarchies, Flynn's taxonomy, shared & distributed memory, Amdahl's and Gustafson's laws.</p>
 
-    <!-- Bento Grid: 4 Subsystems -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
-      <div class="scroll-section bento-card p-8 md:p-10 group">
-        <div class="icon-box bg-blue-500/10 text-blue-400 mb-6">📡</div>
-        <h3 class="headline text-white mb-3">Sensing Subsystem</h3>
-        <p class="body-text">Sensors and ADC convert physical phenomena — temperature, light, vibration — into digital signals for processing.</p>
-        
+    <!-- Stored Program Architecture -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-blue-500/10 text-blue-400 mb-6 inline-block">2-Mark / 10-Mark</span>
+      <h3 class="headline text-white mb-4">Stored Program Computer Architecture</h3>
+      <p class="body-text mb-8">The Von Neumann model — instructions and data share the same memory. The CPU fetches, decodes, and executes instructions sequentially. This is the backbone of all modern computing, extended in HPC with parallelism.</p>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="p-6 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-3">Components</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center gap-2"><span class="text-blue-400">▸</span><span class="text-[#86868b]">Input Unit — accepts data & instructions</span></div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">▸</span><span class="text-[#86868b]">Memory Unit — stores program & data</span></div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">▸</span><span class="text-[#86868b]">CPU (Control Unit + ALU)</span></div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">▸</span><span class="text-[#86868b]">Output Unit — produces results</span></div>
+          </div>
+        </div>
+        <div class="p-6 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-3">Fetch-Decode-Execute Cycle</h4>
+          <div class="flex items-center gap-2 text-sm flex-wrap">
+            <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400">Fetch</span>
+            <span class="text-[#86868b]">→</span>
+            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400">Decode</span>
+            <span class="text-[#86868b]">→</span>
+            <span class="px-3 py-1 rounded-full bg-teal-500/10 text-teal-400">Execute</span>
+            <span class="text-[#86868b]">→</span>
+            <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400">Store</span>
+          </div>
+          <p class="text-[#86868b] text-sm mt-4">The CPU repeats this cycle for every instruction. In HPC, this is pipelined and parallelized.</p>
+        </div>
       </div>
-
-      <div class="scroll-section bento-card p-8 md:p-10 group">
-        <div class="icon-box bg-purple-500/10 text-purple-400 mb-6">🧠</div>
-        <h3 class="headline text-white mb-3">Processing Subsystem</h3>
-        <p class="body-text">Low-power microcontroller — the brain of the node. Manages procedures and runs lightweight OS like TinyOS or Contiki.</p>
-        
-      </div>
-
-      <div class="scroll-section bento-card p-8 md:p-10 group">
-        <div class="icon-box bg-teal-500/10 text-teal-400 mb-6">📶</div>
-        <h3 class="headline text-white mb-3">Communication Subsystem</h3>
-        <p class="body-text">RF Transceiver connects the node to the network. It is the most power-hungry component — critical for routing protocols.</p>
-        
-      </div>
-
-      <div class="scroll-section bento-card p-8 md:p-10 group">
-        <div class="icon-box bg-yellow-500/10 text-yellow-400 mb-6">🔋</div>
-        <h3 class="headline text-white mb-3">Power Subsystem</h3>
-        <p class="body-text">Battery and Power Management Unit. Limited capacity is the single biggest constraint in WSN design.</p>
-        
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-blue-500/5 to-transparent border border-blue-500/10">
+        <h4 class="text-white font-semibold mb-2">Von Neumann Bottleneck</h4>
+        <p class="text-[#86868b] text-sm">Same bus is used for data and instructions, causing limited transfer speed. HPC overcomes this with separate instruction/data caches, high-speed interconnects, and distributed memory systems.</p>
       </div>
     </div>
 
-    <!-- Taxonomy & Environment -->
-    <div class="grid md:grid-cols-2 gap-6 mb-20">
-      <div id="u1-taxonomy" class="scroll-section bento-card p-8 md:p-10">
-        <span class="tag bg-blue-500/10 text-blue-400 mb-6 inline-block">3-Mark Focus</span>
-        <h3 class="headline text-white mb-6">Sensor Taxonomy</h3>
-        <div class="space-y-5">
-          <div class="flex items-start gap-4">
-            <div class="w-1 h-1 rounded-full bg-blue-400 mt-2.5 flex-shrink-0"></div>
-            <div>
-              <span class="text-white font-medium text-[15px]">Active vs Passive</span>
-              <p class="text-[#86868b] text-sm mt-0.5">Active emits energy (radar, sonar); passive senses natural energy (thermometer, camera)</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-1 h-1 rounded-full bg-blue-400 mt-2.5 flex-shrink-0"></div>
-            <div>
-              <span class="text-white font-medium text-[15px]">Absolute vs Relative</span>
-              <p class="text-[#86868b] text-sm mt-0.5">Absolute measures on a fixed scale; relative measures differences</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-1 h-1 rounded-full bg-blue-400 mt-2.5 flex-shrink-0"></div>
-            <div>
-              <span class="text-white font-medium text-[15px]">Omnidirectional</span>
-              <p class="text-[#86868b] text-sm mt-0.5">Coverage area dependent on sensor type and placement</p>
-            </div>
-          </div>
+    <!-- Memory Hierarchy -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-purple-500/10 text-purple-400 mb-6 inline-block">10-Mark Important</span>
+      <h3 class="headline text-white mb-4">Memory Hierarchy</h3>
+      <p class="body-text mb-8">CPU is very fast but memory is slower. A hierarchy balances speed, capacity, and cost. As we move down: speed decreases, capacity increases, cost per bit decreases.</p>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+        <div class="p-4 rounded-2xl bg-gradient-to-b from-blue-500/10 to-blue-500/5 border border-blue-500/20 text-center">
+          <div class="text-2xl mb-2">⚡</div>
+          <div class="text-white font-bold text-sm">Registers</div>
+          <div class="text-xs text-[#86868b] mt-1">Fastest</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-gradient-to-b from-indigo-500/10 to-indigo-500/5 border border-indigo-500/20 text-center">
+          <div class="text-2xl mb-2">📦</div>
+          <div class="text-white font-bold text-sm">L1 Cache</div>
+          <div class="text-xs text-[#86868b] mt-1">~KB</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-gradient-to-b from-purple-500/10 to-purple-500/5 border border-purple-500/20 text-center">
+          <div class="text-2xl mb-2">📦</div>
+          <div class="text-white font-bold text-sm">L2/L3</div>
+          <div class="text-xs text-[#86868b] mt-1">~MB</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-gradient-to-b from-pink-500/10 to-pink-500/5 border border-pink-500/20 text-center">
+          <div class="text-2xl mb-2">💾</div>
+          <div class="text-white font-bold text-sm">RAM</div>
+          <div class="text-xs text-[#86868b] mt-1">~GB</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-gradient-to-b from-slate-500/10 to-slate-500/5 border border-slate-500/20 text-center">
+          <div class="text-2xl mb-2">🗄️</div>
+          <div class="text-white font-bold text-sm">SSD/HDD</div>
+          <div class="text-xs text-[#86868b] mt-1">~TB</div>
         </div>
       </div>
-
-      <div id="u1-environment" class="scroll-section bento-card p-8 md:p-10">
-        <span class="tag bg-purple-500/10 text-purple-400 mb-6 inline-block">Environment</span>
-        <h3 class="headline text-white mb-6">Operating Environment</h3>
-        <p class="body-text mb-6">WSNs operate in harsh, unattended environments — battlefields, underwater, deep forests.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="tag bg-white/5 text-[#86868b] border border-white/5">Miniaturization</span>
-          <span class="tag bg-white/5 text-[#86868b] border border-white/5">Smart Dust</span>
-          <span class="tag bg-white/5 text-[#86868b] border border-white/5">Energy Harvesting</span>
-          <span class="tag bg-white/5 text-[#86868b] border border-white/5">IoT Integration</span>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-3">Temporal Locality</h4>
+          <p class="text-[#86868b] text-sm">Recently used data is likely to be reused soon. Cache stores this data to avoid re-fetching from slower memory.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-3">Spatial Locality</h4>
+          <p class="text-[#86868b] text-sm">Data stored physically close together (like arrays) is likely to be accessed together. Cache lines prefetch neighboring data.</p>
         </div>
       </div>
     </div>
 
-    <!-- Multiple Access & Networks -->
-    <div class="scroll-section bento-card p-8 md:p-12">
-      <h3 class="headline text-white mb-8">Multiple Access & Network Types</h3>
-      <div class="grid md:grid-cols-2 gap-10 mb-10">
-        <div>
-          <h4 class="text-white font-semibold mb-4 text-[15px]">Channel Characteristics</h4>
-          <div class="space-y-3">
-            <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03]">
-              <span class="text-lg">📡</span>
-              <div>
-                <span class="text-white text-sm font-medium">Path Loss</span>
-                <p class="text-[#86868b] text-xs">Signal attenuation over distance</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03]">
-              <span class="text-lg">〰️</span>
-              <div>
-                <span class="text-white text-sm font-medium">Fading</span>
-                <p class="text-[#86868b] text-xs">Multipath propagation fluctuations</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03]">
-              <span class="text-lg">⚡</span>
-              <div>
-                <span class="text-white text-sm font-medium">Interference</span>
-                <p class="text-[#86868b] text-xs">From other RF devices</p>
-              </div>
-            </div>
+    <!-- Flynn's Taxonomy -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-green-500/10 text-green-400 mb-6 inline-block">Very Important — 10 Mark</span>
+      <h3 class="headline text-white mb-4">Flynn's Taxonomy</h3>
+      <p class="body-text mb-8">Michael J. Flynn (1966) classified parallel architectures based on instruction and data streams.</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="bento-card p-6 bg-[#0d0d0d]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 font-bold text-sm">1</div>
+            <h4 class="text-lg font-bold text-blue-400">SISD</h4>
           </div>
+          <p class="text-[#86868b] text-sm mb-2">Single Instruction, Single Data</p>
+          <p class="text-white text-sm">One processor executes one instruction on one data item. Sequential execution.</p>
+          <div class="mt-3 px-3 py-2 rounded-lg bg-blue-500/5 text-blue-400 text-xs">Example: Traditional single-core PC</div>
         </div>
-        <div>
-          <h4 class="text-white font-semibold mb-4 text-[15px]">Access Techniques</h4>
-          <div class="grid grid-cols-2 gap-3">
-            <div class="p-4 rounded-2xl bg-blue-500/5 border border-blue-500/10 text-center">
-              <div class="text-xl font-bold text-blue-400">FDMA</div>
-              <div class="text-xs text-[#86868b] mt-1">Frequency Division</div>
-            </div>
-            <div class="p-4 rounded-2xl bg-teal-500/5 border border-teal-500/10 text-center">
-              <div class="text-xl font-bold text-teal-400">TDMA</div>
-              <div class="text-xs text-[#86868b] mt-1">Time Division</div>
-            </div>
-            <div class="p-4 rounded-2xl bg-purple-500/5 border border-purple-500/10 text-center">
-              <div class="text-xl font-bold text-purple-400">CDMA</div>
-              <div class="text-xs text-[#86868b] mt-1">Code Division</div>
-            </div>
-            <div class="p-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/10 text-center">
-              <div class="text-xl font-bold text-yellow-400">CSMA</div>
-              <div class="text-xs text-[#86868b] mt-1">Carrier Sense</div>
-            </div>
+        <div class="bento-card p-6 bg-[#0d0d0d]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-xl bg-teal-500/10 flex items-center justify-center text-teal-400 font-bold text-sm">2</div>
+            <h4 class="text-lg font-bold text-teal-400">SIMD</h4>
           </div>
+          <p class="text-[#86868b] text-sm mb-2">Single Instruction, Multiple Data</p>
+          <p class="text-white text-sm">One instruction controls multiple processing elements. Same operation on different data simultaneously.</p>
+          <div class="mt-3 px-3 py-2 rounded-lg bg-teal-500/5 text-teal-400 text-xs">Example: GPUs, Vector processors</div>
+        </div>
+        <div class="bento-card p-6 bg-[#0d0d0d]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center text-yellow-400 font-bold text-sm">3</div>
+            <h4 class="text-lg font-bold text-yellow-400">MISD</h4>
+          </div>
+          <p class="text-[#86868b] text-sm mb-2">Multiple Instruction, Single Data</p>
+          <p class="text-white text-sm">Multiple instructions operate on the same data stream. Rarely used in practice.</p>
+          <div class="mt-3 px-3 py-2 rounded-lg bg-yellow-500/5 text-yellow-400 text-xs">Example: Fault-tolerant space systems</div>
+        </div>
+        <div class="bento-card p-6 bg-[#0d0d0d]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 font-bold text-sm">4</div>
+            <h4 class="text-lg font-bold text-purple-400">MIMD</h4>
+          </div>
+          <p class="text-[#86868b] text-sm mb-2">Multiple Instruction, Multiple Data</p>
+          <p class="text-white text-sm">Multiple processors execute different instructions on different data. Most common in HPC.</p>
+          <div class="mt-3 px-3 py-2 rounded-lg bg-purple-500/5 text-purple-400 text-xs">Example: Multicore CPUs, Clusters</div>
         </div>
       </div>
+    </div>
 
+    <!-- Shared vs Distributed -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-red-500/10 text-red-400 mb-6 inline-block">Expected 10-Mark Question</span>
+      <h3 class="headline text-white mb-4">Shared vs Distributed Memory</h3>
       <div class="overflow-x-auto -mx-4 px-4">
         <table class="apple-table min-w-[600px]">
           <thead>
-            <tr>
-              <th>Type</th>
-              <th>Range</th>
-              <th>Example Technology</th>
-              <th>WSN Context</th>
-            </tr>
+            <tr><th>Feature</th><th>Shared Memory</th><th>Distributed Memory</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td><span class="font-semibold">PAN</span></td>
-              <td class="text-[#86868b]">~10 meters</td>
-              <td class="text-[#86868b]">Bluetooth, Zigbee</td>
-              <td class="text-[#86868b]">Body Area Networks</td>
-            </tr>
-            <tr>
-              <td><span class="font-semibold">LAN</span></td>
-              <td class="text-[#86868b]">~100 meters</td>
-              <td class="text-[#86868b]">Wi-Fi (802.11)</td>
-              <td class="text-[#86868b]">Building automation</td>
-            </tr>
-            <tr>
-              <td><span class="font-semibold">MAN</span></td>
-              <td class="text-[#86868b]">City-wide</td>
-              <td class="text-[#86868b]">WiMAX</td>
-              <td class="text-[#86868b]">Smart city infrastructure</td>
-            </tr>
-            <tr>
-              <td><span class="font-semibold">WAN</span></td>
-              <td class="text-[#86868b]">Global</td>
-              <td class="text-[#86868b]">Cellular (4G/5G)</td>
-              <td class="text-[#86868b]">Cloud backhaul</td>
-            </tr>
+            <tr><td><span class="font-semibold">Memory Access</span></td><td class="text-[#86868b]">Common global memory</td><td class="text-[#86868b]">Separate local memory per processor</td></tr>
+            <tr><td><span class="font-semibold">Communication</span></td><td class="text-[#86868b]">Via shared variables</td><td class="text-[#86868b]">Via message passing (MPI)</td></tr>
+            <tr><td><span class="font-semibold">Programming</span></td><td class="text-[#86868b]">Easier (OpenMP)</td><td class="text-[#86868b]">More complex</td></tr>
+            <tr><td><span class="font-semibold">Scalability</span></td><td class="text-[#86868b]">Limited (bus contention)</td><td class="text-[#86868b]">Highly scalable</td></tr>
+            <tr><td><span class="font-semibold">Example</span></td><td class="text-[#86868b]">OpenMP, Multi-core laptop</td><td class="text-[#86868b]">MPI, Supercomputer clusters</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Processors Grid -->
+    <div class="grid md:grid-cols-3 gap-6 mb-6">
+      <div class="scroll-section bento-card p-8">
+        <div class="icon-box bg-blue-500/10 text-blue-400 mb-6">🧠</div>
+        <h3 class="headline text-white mb-3">Multicore Processors</h3>
+        <p class="body-text mb-4">Multiple distinct CPU cores on a single chip. Each core executes instructions independently, sharing L3 cache and main memory.</p>
+        <div class="p-3 rounded-xl bg-blue-500/5 text-blue-400 text-xs font-mono">Example: Quad-core = 4 cores</div>
+      </div>
+      <div class="scroll-section bento-card p-8">
+        <div class="icon-box bg-purple-500/10 text-purple-400 mb-6">🔄</div>
+        <h3 class="headline text-white mb-3">Multithreaded</h3>
+        <p class="body-text mb-4">Single core executes multiple threads. If Thread A stalls waiting for memory, the CPU instantly switches to Thread B.</p>
+        <div class="p-3 rounded-xl bg-purple-500/5 text-purple-400 text-xs font-mono">Example: Intel Hyper-Threading</div>
+      </div>
+      <div class="scroll-section bento-card p-8">
+        <div class="icon-box bg-teal-500/10 text-teal-400 mb-6">📊</div>
+        <h3 class="headline text-white mb-3">Vector Processors</h3>
+        <p class="body-text mb-4">SIMD architecture — one instruction performs the same operation on an entire array (vector) of numbers simultaneously.</p>
+        <div class="p-3 rounded-xl bg-teal-500/5 text-teal-400 text-xs font-mono">Use: Scientific computing, GPUs</div>
+      </div>
+    </div>
+
+    <!-- Amdahl & Gustafson -->
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="scroll-section bento-card p-8 md:p-10">
+        <span class="tag bg-orange-500/10 text-orange-400 mb-4 inline-block">Very Important</span>
+        <h3 class="headline text-white mb-4">Amdahl's Law</h3>
+        <p class="body-text mb-6">Fixed workload. Speedup is strictly limited by the sequential (non-parallelizable) fraction of the code.</p>
+        <div class="formula-box mb-6">
+          <div class="label">Speedup Formula</div>
+          <div>S(N) = 1 / [(1 − P) + P/N]</div>
+        </div>
+        <div class="space-y-2 text-sm">
+          <div class="flex items-start gap-2"><span class="text-orange-400 mt-1">•</span><span class="text-[#86868b]"><span class="text-white">S(N)</span> = Theoretical maximum speedup</span></div>
+          <div class="flex items-start gap-2"><span class="text-orange-400 mt-1">•</span><span class="text-[#86868b]"><span class="text-white">P</span> = Parallel portion fraction</span></div>
+          <div class="flex items-start gap-2"><span class="text-orange-400 mt-1">•</span><span class="text-[#86868b]"><span class="text-white">N</span> = Number of processors</span></div>
+        </div>
+        <p class="text-[#86868b] text-sm mt-4">If 5% is serial, max speedup is 20× — no matter how many processors you add.</p>
+      </div>
+      <div class="scroll-section bento-card p-8 md:p-10">
+        <span class="tag bg-green-500/10 text-green-400 mb-4 inline-block">Very Important</span>
+        <h3 class="headline text-white mb-4">Gustafson's Law</h3>
+        <p class="body-text mb-6">Scaled workload. Execution time is fixed; problem size grows with processors. The sequential part shrinks proportionally.</p>
+        <div class="formula-box mb-6">
+          <div class="label">Speedup Formula</div>
+          <div>S(N) = N − α(N − 1)</div>
+        </div>
+        <div class="space-y-2 text-sm">
+          <div class="flex items-start gap-2"><span class="text-green-400 mt-1">•</span><span class="text-[#86868b]"><span class="text-white">α</span> = Serial fraction</span></div>
+          <div class="flex items-start gap-2"><span class="text-green-400 mt-1">•</span><span class="text-[#86868b]"><span class="text-white">N</span> = Number of processors</span></div>
+        </div>
+        <p class="text-[#86868b] text-sm mt-4">Optimistic view: more processors → bigger problems → efficiency stays high.</p>
+      </div>
+    </div>
+
+    <!-- Comparison Amdahl vs Gustafson -->
+    <div class="scroll-section bento-card p-8 md:p-12 mt-6">
+      <h3 class="headline text-white mb-6">Amdahl vs Gustafson</h3>
+      <div class="overflow-x-auto -mx-4 px-4">
+        <table class="apple-table min-w-[500px]">
+          <thead>
+            <tr><th>Aspect</th><th>Amdahl's Law</th><th>Gustafson's Law</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="font-semibold">Workload</span></td><td class="text-[#86868b]">Fixed problem size</td><td class="text-[#86868b]">Problem scales with processors</td></tr>
+            <tr><td><span class="font-semibold">Scaling Type</span></td><td class="text-[#86868b]">Strong scaling</td><td class="text-[#86868b]">Weak scaling</td></tr>
+            <tr><td><span class="font-semibold">Outlook</span></td><td class="text-[#86868b]">Pessimistic</td><td class="text-[#86868b]">Optimistic</td></tr>
+            <tr><td><span class="font-semibold">Key Insight</span></td><td class="text-[#86868b]">Serial part is the bottleneck</td><td class="text-[#86868b]">Parallel part grows with problem</td></tr>
           </tbody>
         </table>
       </div>
@@ -613,169 +619,262 @@
 <!-- ==================== UNIT 2 ==================== -->
 <section id="unit2" class="section-pad relative">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="scroll-section mb-4">
-      <span class="caption text-[#86868b]">Unit 02</span>
-    </div>
-    <h2 class="scroll-section display-lg mb-6 max-w-3xl">
-      Ad Hoc & Sensor<br><span class="gradient-text">Networks.</span>
-    </h2>
-    <p class="scroll-section body-text max-w-2xl mb-20">
-      Contrasting traditional networks with Ad Hoc and Sensor architectures. The focus is on unique constraints and energy efficiency.
-    </p>
+    <div class="scroll-section mb-4"><span class="caption text-[#86868b]">Unit 02 — Critical</span></div>
+    <h2 class="scroll-section display-lg mb-6 max-w-3xl">OpenMP &<br><span class="gradient-text-blue">MPI.</span></h2>
+    <p class="scroll-section body-text max-w-2xl mb-20">Shared-memory parallel programming with OpenMP and distributed-memory programming with MPI. Programs, case studies, and performance pitfalls.</p>
 
-    <!-- Architecture Flow -->
+    <!-- OpenMP Intro -->
     <div class="scroll-section bento-card p-8 md:p-12 mb-6">
-      <h3 class="headline text-white mb-10 text-center">WSN Architecture Flow</h3>
-      <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
-        <div class="w-full md:w-36 p-6 rounded-3xl bg-green-500/5 border border-green-500/10 text-center">
-          <div class="text-3xl mb-2">📟</div>
-          <span class="text-green-400 font-semibold text-sm">Sensor Nodes</span>
+      <span class="tag bg-blue-500/10 text-blue-400 mb-6 inline-block">Program-Heavy Unit</span>
+      <h3 class="headline text-white mb-4">OpenMP — Shared Memory Parallel Programming</h3>
+      <p class="body-text mb-8">OpenMP (Open Multi-Processing) is an API for shared-memory multiprocessing in C/C++. It uses compiler directives (<code class="text-blue-400">#pragma omp</code>) and follows the Fork-Join model.</p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="p-6 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-3">Fork-Join Model</h4>
+          <div class="space-y-3 text-sm">
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-bold">1</div><span class="text-[#86868b]">Master thread starts execution</span></div>
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-bold">2</div><span class="text-[#86868b]">Fork: multiple worker threads created</span></div>
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-bold">3</div><span class="text-[#86868b]">Threads execute parallel region</span></div>
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-bold">4</div><span class="text-[#86868b]">Join: threads synchronize and merge</span></div>
+          </div>
         </div>
-        <svg class="hidden md:block text-[#86868b]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        <svg class="md:hidden text-[#86868b] rotate-90" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        <div class="w-full md:w-36 p-6 rounded-3xl bg-blue-500/5 border border-blue-500/10 text-center">
-          <div class="text-3xl mb-2">🌐</div>
-          <span class="text-blue-400 font-semibold text-sm">Sink / Gateway</span>
-        </div>
-        <svg class="hidden md:block text-[#86868b]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        <svg class="md:hidden text-[#86868b] rotate-90" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        <div class="w-full md:w-36 p-6 rounded-3xl bg-purple-500/5 border border-purple-500/10 text-center">
-          <div class="text-3xl mb-2">☁️</div>
-          <span class="text-purple-400 font-semibold text-sm">Internet / Cloud</span>
-        </div>
-        <svg class="hidden md:block text-[#86868b]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        <svg class="md:hidden text-[#86868b] rotate-90" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        <div class="w-full md:w-36 p-6 rounded-3xl bg-orange-500/5 border border-orange-500/10 text-center">
-          <div class="text-3xl mb-2">👤</div>
-          <span class="text-orange-400 font-semibold text-sm">End User</span>
+        <div class="p-6 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-3">Data Scoping</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span><div><span class="text-white font-medium">shared</span><p class="text-[#86868b] text-xs">All threads read/write same memory</p></div></div>
+            <div class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span><div><span class="text-white font-medium">private</span><p class="text-[#86868b] text-xs">Each thread has its own copy</p></div></div>
+            <div class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span><div><span class="text-white font-medium">firstprivate</span><p class="text-[#86868b] text-xs">Initialized private copy</p></div></div>
+          </div>
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-4 mt-10">
-        <div class="p-5 rounded-2xl bg-white/[0.02]">
-          <div class="flex items-center gap-2 mb-2">
-            <div class="w-2 h-2 rounded-full bg-green-400"></div>
-            <span class="text-white font-semibold text-sm">Flat Architecture</span>
+      <h4 class="text-white font-semibold mb-4">Basic OpenMP Program</h4>
+      <div class="code-block mb-6">
+<span class="pp">#include</span> <span class="str">&lt;stdio.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;omp.h&gt;</span>
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="pp">#pragma omp parallel</span>
+    {
+        <span class="fn">printf</span>(<span class="str">"Hello World\n"</span>);
+    }
+    <span class="kw">return</span> <span class="num">0</span>;
+}
+      </div>
+      <p class="text-[#86868b] text-sm">Compilation: <code class="text-white bg-white/5 px-2 py-1 rounded">gcc file.c -fopenmp</code></p>
+    </div>
+
+    <!-- OpenMP Directives -->
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <div class="scroll-section bento-card p-8">
+        <h3 class="headline text-white mb-4">Key Directives</h3>
+        <div class="space-y-3">
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <code class="text-blue-400 text-sm font-mono">#pragma omp parallel for</code>
+            <p class="text-[#86868b] text-xs mt-1">Divides loop iterations among threads automatically</p>
           </div>
-          <p class="text-[#86868b] text-sm">All nodes have identical roles and battery levels. Best for small networks.</p>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <code class="text-blue-400 text-sm font-mono">#pragma omp critical</code>
+            <p class="text-[#86868b] text-xs mt-1">Only one thread executes this block at a time</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <code class="text-blue-400 text-sm font-mono">#pragma omp barrier</code>
+            <p class="text-[#86868b] text-xs mt-1">All threads wait until everyone reaches this point</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <code class="text-blue-400 text-sm font-mono">#pragma omp parallel for reduction(+:sum)</code>
+            <p class="text-[#86868b] text-xs mt-1">Safely combines local results into global result</p>
+          </div>
         </div>
-        <div class="p-5 rounded-2xl bg-white/[0.02]">
-          <div class="flex items-center gap-2 mb-2">
-            <div class="w-2 h-2 rounded-full bg-blue-400"></div>
-            <span class="text-white font-semibold text-sm">Hierarchical (Clustered)</span>
+      </div>
+      <div class="scroll-section bento-card p-8">
+        <h3 class="headline text-white mb-4">Loop Scheduling</h3>
+        <div class="space-y-3">
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Static</span>
+            <p class="text-[#86868b] text-xs mt-1">Chunks assigned to threads before loop starts. Predictable.</p>
           </div>
-          <p class="text-[#86868b] text-sm">Cluster Head aggregates data to sink. Highly energy-efficient for large networks (LEACH).</p>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Dynamic</span>
+            <p class="text-[#86868b] text-xs mt-1">Threads grab chunks on the fly as they finish. Best for unequal work.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-white font-semibold text-sm">Guided</span>
+            <p class="text-[#86868b] text-xs mt-1">Chunk size decreases over time. Balanced approach.</p>
+          </div>
+        </div>
+        <div class="mt-4 p-4 rounded-xl bg-gradient-to-r from-blue-500/5 to-transparent border border-blue-500/10">
+          <code class="text-blue-400 text-xs font-mono">#pragma omp parallel for schedule(dynamic)</code>
         </div>
       </div>
     </div>
 
-    <!-- Constraints & Energy Chart -->
-    <div class="grid lg:grid-cols-5 gap-6 mb-6">
-      <div class="lg:col-span-3 scroll-section bento-card p-8 md:p-10">
-        <span class="tag bg-red-500/10 text-red-400 mb-6 inline-block">Core Concept — 7 Marks</span>
-        <h3 class="headline text-white mb-8">Unique Constraints</h3>
-        <div class="space-y-4">
-          <div class="flex items-start gap-4 p-4 rounded-2xl bg-red-500/5 border border-red-500/10">
-            <span class="text-xl">🔋</span>
-            <div>
-              <span class="text-white font-semibold text-[15px]">Energy Constraints</span>
-              <p class="text-[#86868b] text-sm mt-0.5">The most critical issue — irreplaceable batteries</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4 p-4 rounded-2xl bg-orange-500/5 border border-orange-500/10">
-            <span class="text-xl">🧠</span>
-            <div>
-              <span class="text-white font-semibold text-[15px]">Computation Limits</span>
-              <p class="text-[#86868b] text-sm mt-0.5">Few KBs of memory, limited processing power</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4 p-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/10">
-            <span class="text-xl">📶</span>
-            <div>
-              <span class="text-white font-semibold text-[15px]">Communication Limits</span>
-              <p class="text-[#86868b] text-sm mt-0.5">Low bandwidth, short range, unreliable links</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4 p-4 rounded-2xl bg-purple-500/5 border border-purple-500/10">
-            <span class="text-xl">🔢</span>
-            <div>
-              <span class="text-white font-semibold text-[15px]">Node Density</span>
-              <p class="text-[#86868b] text-sm mt-0.5">Massive number of nodes requires scalable protocols</p>
-            </div>
-          </div>
-        </div>
+    <!-- Jacobi OpenMP -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-purple-500/10 text-purple-400 mb-6 inline-block">Case Study — 10 Mark</span>
+      <h3 class="headline text-white mb-4">Parallel Jacobi Algorithm (OpenMP)</h3>
+      <p class="body-text mb-6">Used to solve systems of linear equations iteratively. Highly parallelizable because calculating the current step doesn't depend on other calculations in the same step.</p>
+      <div class="formula-box mb-6">
+        <div class="label">Jacobi Iteration Formula</div>
+        <div>x<sub>i</sub><sup>(k+1)</sup> = (1/a<sub>ii</sub>) × [ b<sub>i</sub> − Σ<sub>j≠i</sub> a<sub>ij</sub> × x<sub>j</sub><sup>(k)</sup> ]</div>
       </div>
+      <h4 class="text-white font-semibold mb-4">OpenMP Implementation</h4>
+      <div class="code-block">
+<span class="pp">#pragma omp parallel for</span>
+<span class="kw">for</span>(<span class="tp">int</span> i = <span class="num">0</span>; i &lt; n; i++) {
+    <span class="tp">double</span> sigma = <span class="num">0</span>;
+    <span class="kw">for</span>(<span class="tp">int</span> j = <span class="num">0</span>; j &lt; n; j++) {
+        <span class="kw">if</span>(i != j)
+            sigma += A[i][j] * x[j];
+    }
+    xnew[i] = (b[i] - sigma) / A[i][i];
+}
+      </div>
+      <p class="text-[#86868b] text-sm mt-4">Key: Read from "old" grid, write to "new" grid to avoid race conditions.</p>
+    </div>
 
-      <div class="lg:col-span-2 scroll-section bento-card p-8 md:p-10 flex flex-col">
-        <h3 class="headline text-white mb-2 text-center">Energy Dissipation</h3>
-        <p class="text-[#86868b] text-sm text-center mb-6">Typical node power consumption</p>
-        <div class="flex-grow flex items-center justify-center" style="min-height: 280px;">
-          <canvas id="energyChart"></canvas>
+    <!-- Performance Pitfalls -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-red-500/10 text-red-400 mb-6 inline-block">Performance Pitfalls</span>
+      <h3 class="headline text-white mb-4">OpenMP Performance Pitfalls</h3>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="p-5 rounded-2xl bg-red-500/5 border border-red-500/10">
+          <h4 class="text-red-400 font-semibold mb-2">False Sharing</h4>
+          <p class="text-[#86868b] text-sm">Two threads update different variables that accidentally reside on the same cache line. CPU constantly invalidates and reloads cache — massive performance killer.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-orange-500/5 border border-orange-500/10">
+          <h4 class="text-orange-400 font-semibold mb-2">Load Imbalance</h4>
+          <p class="text-[#86868b] text-sm">Some processors finish tasks earlier while others are still working. Leads to idle CPU time and reduced overall efficiency.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-yellow-500/5 border border-yellow-500/10">
+          <h4 class="text-yellow-400 font-semibold mb-2">Synchronization Overhead</h4>
+          <p class="text-[#86868b] text-sm">Frequent use of locks, barriers, and critical sections causes threads to wait for each other unnecessarily.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-purple-500/5 border border-purple-500/10">
+          <h4 class="text-purple-400 font-semibold mb-2">Communication Overhead</h4>
+          <p class="text-[#86868b] text-sm">Excessive data transfer between processors. High latency and bandwidth limitations reduce speed.</p>
         </div>
       </div>
     </div>
 
-    <!-- Advantages vs Issues -->
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="scroll-section bento-card p-8 md:p-10">
-        <h3 class="headline text-teal-400 mb-6">Advantages</h3>
-        <div class="space-y-4">
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-teal-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>
-            <div>
-              <span class="text-white font-medium text-[15px]">Infrastructure-less</span>
-              <p class="text-[#86868b] text-sm">Rapid deployment without pre-existing routers</p>
-            </div>
+    <!-- MPI Section -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-teal-500/10 text-teal-400 mb-6 inline-block">Program-Heavy Unit</span>
+      <h3 class="headline text-white mb-4">MPI — Distributed Memory Programming</h3>
+      <p class="body-text mb-8">Message Passing Interface (MPI) is the standard for distributed systems. Processes have separate memories and communicate by explicitly sending messages over a network.</p>
+
+      <h4 class="text-white font-semibold mb-4">Basic MPI Program</h4>
+      <div class="code-block mb-6">
+<span class="pp">#include</span> <span class="str">&lt;mpi.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;stdio.h&gt;</span>
+
+<span class="tp">int</span> <span class="fn">main</span>(<span class="tp">int</span> argc, <span class="tp">char</span> *argv[]) {
+    <span class="fn">MPI_Init</span>(&amp;argc, &amp;argv);
+
+    <span class="tp">int</span> rank, size;
+    <span class="fn">MPI_Comm_rank</span>(MPI_COMM_WORLD, &amp;rank);
+    <span class="fn">MPI_Comm_size</span>(MPI_COMM_WORLD, &amp;size);
+
+    <span class="fn">printf</span>(<span class="str">"Hello from process %d\n"</span>, rank);
+
+    <span class="fn">MPI_Finalize</span>();
+    <span class="kw">return</span> <span class="num">0</span>;
+}
+      </div>
+      <p class="text-[#86868b] text-sm mb-8">Compilation: <code class="text-white bg-white/5 px-2 py-1 rounded">mpicc file.c</code> &nbsp; Run: <code class="text-white bg-white/5 px-2 py-1 rounded">mpirun -np 4 ./a.out</code></p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="p-6 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-3">Point-to-Point Communication</h4>
+          <p class="text-[#86868b] text-sm mb-3">Direct message between exactly two processes.</p>
+          <div class="space-y-2">
+            <code class="block text-teal-400 text-xs font-mono bg-teal-500/5 p-2 rounded">MPI_Send(&amp;data, 1, MPI_INT, dest, tag, comm);</code>
+            <code class="block text-teal-400 text-xs font-mono bg-teal-500/5 p-2 rounded">MPI_Recv(&amp;data, 1, MPI_INT, src, tag, comm, &amp;status);</code>
           </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-teal-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>
-            <div>
-              <span class="text-white font-medium text-[15px]">Self-Organizing</span>
-              <p class="text-[#86868b] text-sm">Auto-form routing tables and connections</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-teal-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>
-            <div>
-              <span class="text-white font-medium text-[15px]">Fault Tolerance</span>
-              <p class="text-[#86868b] text-sm">Network re-routes traffic if a node dies</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-teal-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>
-            <div>
-              <span class="text-white font-medium text-[15px]">Mobility Support</span>
-              <p class="text-[#86868b] text-sm">Naturally supports moving nodes</p>
-            </div>
+        </div>
+        <div class="p-6 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-3">Non-Blocking Communication</h4>
+          <p class="text-[#86868b] text-sm mb-3">Program doesn't wait for transfer to finish. Overlaps communication with computation.</p>
+          <div class="space-y-2">
+            <code class="block text-green-400 text-xs font-mono bg-green-500/5 p-2 rounded">MPI_Isend(&amp;data, ...); // Immediate send</code>
+            <code class="block text-green-400 text-xs font-mono bg-green-500/5 p-2 rounded">MPI_Irecv(&amp;data, ...); // Immediate receive</code>
           </div>
         </div>
       </div>
 
-      <div class="scroll-section bento-card p-8 md:p-10">
-        <h3 class="headline text-red-400 mb-6">Issues</h3>
-        <div class="space-y-4">
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-            <div>
-              <span class="text-white font-medium text-[15px]">Hidden Terminal Problem</span>
-              <p class="text-[#86868b] text-sm">A & C talk to B but not each other → collisions</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-            <div>
-              <span class="text-white font-medium text-[15px]">Routing Overhead</span>
-              <p class="text-[#86868b] text-sm">Dynamic topology means constant table updates</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-            <div>
-              <span class="text-white font-medium text-[15px]">Security Vulnerabilities</span>
-              <p class="text-[#86868b] text-sm">Open wireless medium enables eavesdropping</p>
-            </div>
-          </div>
+      <h4 class="text-white font-semibold mb-4">Collective Communication</h4>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+        <div class="p-4 rounded-2xl bg-blue-500/5 border border-blue-500/10 text-center">
+          <div class="text-blue-400 font-bold text-sm">MPI_Bcast</div>
+          <div class="text-xs text-[#86868b] mt-1">One → All</div>
         </div>
+        <div class="p-4 rounded-2xl bg-purple-500/5 border border-purple-500/10 text-center">
+          <div class="text-purple-400 font-bold text-sm">MPI_Reduce</div>
+          <div class="text-xs text-[#86868b] mt-1">All → One (op)</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-teal-500/5 border border-teal-500/10 text-center">
+          <div class="text-teal-400 font-bold text-sm">MPI_Scatter</div>
+          <div class="text-xs text-[#86868b] mt-1">Distribute chunks</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-orange-500/5 border border-orange-500/10 text-center">
+          <div class="text-orange-400 font-bold text-sm">MPI_Gather</div>
+          <div class="text-xs text-[#86868b] mt-1">Collect chunks</div>
+        </div>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-teal-500/5 to-transparent border border-teal-500/10">
+        <h4 class="text-white font-semibold mb-2">Message Transfer Time Formula</h4>
+        <div class="formula-box mb-4">
+          <div class="label">Transfer Time</div>
+          <div>T = L + m/B</div>
+        </div>
+        <div class="grid grid-cols-3 gap-4 text-sm">
+          <div><span class="text-white font-medium">T</span><p class="text-[#86868b] text-xs">Total transfer time</p></div>
+          <div><span class="text-white font-medium">L</span><p class="text-[#86868b] text-xs">Latency (startup time)</p></div>
+          <div><span class="text-white font-medium">m/B</span><p class="text-[#86868b] text-xs">Message size / Bandwidth</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MPI Jacobi -->
+    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
+      <span class="tag bg-indigo-500/10 text-indigo-400 mb-6 inline-block">Case Study — 10 Mark</span>
+      <h3 class="headline text-white mb-4">MPI Parallelization of Jacobi Solver</h3>
+      <p class="body-text mb-6">The global grid is sliced into horizontal chunks. Each process gets a chunk. To calculate boundary edges, processes need data from neighbors.</p>
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-transparent border border-indigo-500/10 mb-6">
+        <h4 class="text-indigo-400 font-semibold mb-2">The Solution: Halo / Ghost Cells</h4>
+        <p class="text-[#86868b] text-sm">Each processor allocates an extra empty row around its data called a "Ghost Cell." Before computing the next iteration, processors use Point-to-Point messages to swap their boundary rows with neighbors, filling the ghost cells.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-5 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-2">Virtual Topologies</h4>
+          <p class="text-[#86868b] text-sm">MPI arranges processes into logical grids (e.g., Cartesian) so processors know their North, South, East, West neighbors for easy halo exchange.</p>
+          <code class="block mt-3 text-indigo-400 text-xs font-mono bg-indigo-500/5 p-2 rounded">MPI_Cart_create(...)</code>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03]">
+          <h4 class="text-white font-semibold mb-2">Performance Properties</h4>
+          <p class="text-[#86868b] text-sm">MPI performance depends heavily on network bandwidth and message latency. Minimizing communication volume is key to scaling.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OpenMP vs MPI -->
+    <div class="scroll-section bento-card p-8 md:p-12">
+      <h3 class="headline text-white mb-6">OpenMP vs MPI</h3>
+      <div class="overflow-x-auto -mx-4 px-4">
+        <table class="apple-table min-w-[600px]">
+          <thead>
+            <tr><th>Feature</th><th>OpenMP</th><th>MPI</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="font-semibold">Memory</span></td><td class="text-[#86868b]">Shared memory</td><td class="text-[#86868b]">Distributed memory</td></tr>
+            <tr><td><span class="font-semibold">Unit</span></td><td class="text-[#86868b]">Threads</td><td class="text-[#86868b]">Processes</td></tr>
+            <tr><td><span class="font-semibold">Difficulty</span></td><td class="text-[#86868b]">Easier (directives)</td><td class="text-[#86868b]">Complex (explicit messages)</td></tr>
+            <tr><td><span class="font-semibold">Hardware</span></td><td class="text-[#86868b]">Single machine</td><td class="text-[#86868b]">Multiple machines / cluster</td></tr>
+            <tr><td><span class="font-semibold">Scalability</span></td><td class="text-[#86868b]">Limited (single node)</td><td class="text-[#86868b]">Highly scalable</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -786,351 +885,205 @@
 <!-- ==================== UNIT 3 ==================== -->
 <section id="unit3" class="section-pad relative">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="scroll-section mb-4">
-      <span class="caption text-[#86868b]">Unit 03 — Critical</span>
-    </div>
-    <h2 class="scroll-section display-lg mb-6 max-w-3xl">
-      MAC & Routing<br><span class="gradient-text-blue">Protocols.</span>
-    </h2>
-    <p class="scroll-section body-text max-w-2xl mb-20">
-      How nodes share the wireless medium and how data finds its destination. Memorize S-MAC and protocol classifications.
-    </p>
+    <div class="scroll-section mb-4"><span class="caption text-[#86868b]">Unit 03 — Critical</span></div>
+    <h2 class="scroll-section display-lg mb-6 max-w-3xl">CUDA<br><span class="gradient-text-teal">Programming.</span></h2>
+    <p class="scroll-section body-text max-w-2xl mb-20">GPU programming with NVIDIA CUDA — execution hierarchy, memory types, matrix operations, dynamic parallelism, and real-world case studies.</p>
 
-    <!-- MAC Protocols -->
+    <!-- GPU Basics -->
     <div class="scroll-section bento-card p-8 md:p-12 mb-6">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="tag bg-green-500/10 text-green-400">Expected 15 Mark Question</span>
-      </div>
-      <h3 class="headline text-white mb-4">Classification of MAC Protocols</h3>
-      <p class="body-text mb-10">MAC protocols dictate how nodes access the shared wireless channel. In WSNs, avoiding energy waste is the main goal.</p>
+      <span class="tag bg-teal-500/10 text-teal-400 mb-6 inline-block">Program-Heavy Unit</span>
+      <h3 class="headline text-white mb-4">GPU Programming Basics</h3>
+      <p class="body-text mb-8">GPUs have thousands of smaller, simpler cores compared to CPUs. Designed for high-throughput, data-parallel tasks — doing the exact same math on millions of elements simultaneously.</p>
 
-      <div class="grid md:grid-cols-2 gap-6 mb-10">
-        <div class="bento-card p-6 md:p-8 bg-[#0d0d0d]">
-          <h4 class="text-lg font-bold text-indigo-400 mb-3">Contention-Based (CSMA)</h4>
-          <p class="text-[#86868b] text-sm mb-4">Nodes compete for the channel. If busy, they wait.</p>
-          <div class="space-y-2">
-            <div class="flex items-center gap-2 text-sm">
-              <svg class="w-4 h-4 text-green-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
-              <span class="text-white">Scalable, adapts to changes</span>
-            </div>
-            <div class="flex items-center gap-2 text-sm">
-              <svg class="w-4 h-4 text-red-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
-              <span class="text-[#86868b]">High energy waste from idle listening</span>
-            </div>
-          </div>
-          <div class="mt-4 px-3 py-2 rounded-lg bg-indigo-500/5 text-center">
-            <span class="text-indigo-400 text-xs font-mono">Example: CSMA/CA</span>
-          </div>
+      <div class="grid md:grid-cols-3 gap-4 mb-8">
+        <div class="p-6 rounded-2xl bg-teal-500/5 border border-teal-500/10 text-center">
+          <div class="text-3xl mb-3">🧵</div>
+          <h4 class="text-white font-bold text-sm">Thread</h4>
+          <p class="text-[#86868b] text-xs mt-1">Smallest unit of execution</p>
         </div>
-
-        <div class="bento-card p-6 md:p-8 bg-[#0d0d0d]">
-          <h4 class="text-lg font-bold text-teal-400 mb-3">Schedule-Based (TDMA)</h4>
-          <p class="text-[#86868b] text-sm mb-4">Time is divided into slots. Each node gets a slot.</p>
-          <div class="space-y-2">
-            <div class="flex items-center gap-2 text-sm">
-              <svg class="w-4 h-4 text-green-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
-              <span class="text-white">Collision-free, eliminates idle listening</span>
-            </div>
-            <div class="flex items-center gap-2 text-sm">
-              <svg class="w-4 h-4 text-red-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
-              <span class="text-[#86868b]">Requires strict clock synchronization</span>
-            </div>
-          </div>
-          <div class="mt-4 px-3 py-2 rounded-lg bg-teal-500/5 text-center">
-            <span class="text-teal-400 text-xs font-mono">Nodes sleep when not their slot</span>
-          </div>
+        <div class="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/10 text-center">
+          <div class="text-3xl mb-3">📦</div>
+          <h4 class="text-white font-bold text-sm">Block</h4>
+          <p class="text-[#86868b] text-xs mt-1">Group of threads (max 1024)</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-purple-500/5 border border-purple-500/10 text-center">
+          <div class="text-3xl mb-3">🌐</div>
+          <h4 class="text-white font-bold text-sm">Grid</h4>
+          <p class="text-[#86868b] text-xs mt-1">Collection of blocks</p>
         </div>
       </div>
 
-      <!-- S-MAC -->
-      <div class="bento-card p-8 md:p-10 bg-gradient-to-br from-indigo-500/5 to-teal-500/5 border-indigo-500/20">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-r from-indigo-500 to-teal-500 flex items-center justify-center text-white font-bold">★</div>
-          <h4 class="text-xl font-bold text-white">S-MAC (Sensor-MAC)</h4>
-        </div>
-        <p class="text-[#86868b] mb-8">Designed to reduce energy consumption from <span class="text-white font-semibold">idle listening</span>.</p>
-        <div class="grid md:grid-cols-3 gap-4">
-          <div class="p-5 rounded-2xl bg-white/[0.03] text-center">
-            <div class="text-3xl mb-3">😴</div>
-            <h5 class="text-white font-semibold text-sm mb-1">Periodic Listen & Sleep</h5>
-            <p class="text-[#86868b] text-xs">Nodes sleep, then wake up to listen</p>
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-teal-500/5 to-transparent border border-teal-500/10 mb-8">
+        <h4 class="text-teal-400 font-semibold mb-3">Execution Hierarchy</h4>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+          <div class="p-4 rounded-xl bg-white/[0.03] w-full md:w-32">
+            <div class="text-white font-bold">Grid</div>
           </div>
-          <div class="p-5 rounded-2xl bg-white/[0.03] text-center">
-            <div class="text-3xl mb-3">🔄</div>
-            <h5 class="text-white font-semibold text-sm mb-1">Synchronization</h5>
-            <p class="text-[#86868b] text-xs">Virtual clusters with same schedules</p>
+          <svg class="hidden md:block text-[#86868b]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg class="md:hidden text-[#86868b] rotate-90" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <div class="p-4 rounded-xl bg-white/[0.03] w-full md:w-32">
+            <div class="text-white font-bold">Block</div>
           </div>
-          <div class="p-5 rounded-2xl bg-white/[0.03] text-center">
-            <div class="text-3xl mb-3">📨</div>
-            <h5 class="text-white font-semibold text-sm mb-1">Message Passing</h5>
-            <p class="text-[#86868b] text-xs">Long messages broken into fragments</p>
+          <svg class="hidden md:block text-[#86868b]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg class="md:hidden text-[#86868b] rotate-90" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <div class="p-4 rounded-xl bg-white/[0.03] w-full md:w-32">
+            <div class="text-white font-bold">Thread</div>
           </div>
         </div>
+        <p class="text-[#86868b] text-sm text-center mt-4">GPU hardware schedules Blocks onto Streaming Multiprocessors (SMs). Threads in a block can share memory.</p>
+      </div>
+
+      <h4 class="text-white font-semibold mb-4">CUDA Hello World</h4>
+      <div class="code-block mb-6">
+<span class="pp">#include</span> <span class="str">&lt;stdio.h&gt;</span>
+
+<span class="pp">__global__</span> <span class="tp">void</span> <span class="fn">hello</span>() {
+    <span class="fn">printf</span>(<span class="str">"Hello World from GPU\n"</span>);
+}
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="fn">hello</span>&lt;&lt;&lt;<span class="num">1</span>, <span class="num">1</span>&gt;&gt;&gt;();
+    <span class="fn">cudaDeviceSynchronize</span>();
+    <span class="kw">return</span> <span class="num">0</span>;
+}
       </div>
     </div>
 
-    <!-- IEEE 802.15.4 -->
+    <!-- Matrix Addition CUDA -->
     <div class="scroll-section bento-card p-8 md:p-12 mb-6">
-      <h3 class="headline text-white mb-4">IEEE 802.15.4 Standard</h3>
-      <p class="body-text mb-8">The de facto standard for Low-Rate Wireless Personal Area Networks (LR-WPANs). ZigBee builds upon this.</p>
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/10">
-          <div class="text-2xl mb-3">🎯</div>
-          <h4 class="text-white font-semibold mb-2">Focus</h4>
-          <p class="text-[#86868b] text-sm">Low cost, low speed communication with minimal infrastructure</p>
+      <span class="tag bg-purple-500/10 text-purple-400 mb-6 inline-block">Very Important Program</span>
+      <h3 class="headline text-white mb-4">Matrix Addition using CUDA</h3>
+      <div class="code-block">
+<span class="pp">#include</span> <span class="str">&lt;stdio.h&gt;</span>
+
+<span class="pp">__global__</span> <span class="tp">void</span> <span class="fn">add</span>(<span class="tp">int</span> *a, <span class="tp">int</span> *b, <span class="tp">int</span> *c) {
+    <span class="tp">int</span> id = <span class="fn">threadIdx.x</span>;
+    c[id] = a[id] + b[id];
+}
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="tp">int</span> a[<span class="num">5</span>] = {<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>};
+    <span class="tp">int</span> b[<span class="num">5</span>] = {<span class="num">5</span>,<span class="num">4</span>,<span class="num">3</span>,<span class="num">2</span>,<span class="num">1</span>};
+    <span class="tp">int</span> c[<span class="num">5</span>];
+    <span class="tp">int</span> *d_a, *d_b, *d_c;
+
+    <span class="fn">cudaMalloc</span>(&amp;d_a, <span class="num">5</span>*<span class="kw">sizeof</span>(<span class="tp">int</span>));
+    <span class="fn">cudaMalloc</span>(&amp;d_b, <span class="num">5</span>*<span class="kw">sizeof</span>(<span class="tp">int</span>));
+    <span class="fn">cudaMalloc</span>(&amp;d_c, <span class="num">5</span>*<span class="kw">sizeof</span>(<span class="tp">int</span>));
+
+    <span class="fn">cudaMemcpy</span>(d_a, a, <span class="num">5</span>*<span class="kw">sizeof</span>(<span class="tp">int</span>), cudaMemcpyHostToDevice);
+    <span class="fn">cudaMemcpy</span>(d_b, b, <span class="num">5</span>*<span class="kw">sizeof</span>(<span class="tp">int</span>), cudaMemcpyHostToDevice);
+
+    <span class="fn">add</span>&lt;&lt;&lt;<span class="num">1</span>, <span class="num">5</span>&gt;&gt;&gt;(d_a, d_b, d_c);
+
+    <span class="fn">cudaMemcpy</span>(c, d_c, <span class="num">5</span>*<span class="kw">sizeof</span>(<span class="tp">int</span>), cudaMemcpyDeviceToHost);
+
+    <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>; i&lt;<span class="num">5</span>; i++)
+        <span class="fn">printf</span>(<span class="str">"%d "</span>, c[i]);
+
+    <span class="fn">cudaFree</span>(d_a); <span class="fn">cudaFree</span>(d_b); <span class="fn">cudaFree</span>(d_c);
+    <span class="kw">return</span> <span class="num">0</span>;
+}
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 mt-6">
+        <div class="p-4 rounded-xl bg-white/[0.03]">
+          <span class="text-white font-semibold text-sm">cudaMalloc</span>
+          <p class="text-[#86868b] text-xs mt-1">Allocate memory on GPU</p>
         </div>
-        <div class="p-6 rounded-2xl bg-purple-500/5 border border-purple-500/10">
-          <div class="text-2xl mb-3">⚙️</div>
-          <h4 class="text-white font-semibold mb-2">Modes</h4>
-          <p class="text-[#86868b] text-sm">Beacon enabled (slotted CSMA/CA + GTS) and Non-beacon (unslotted)</p>
+        <div class="p-4 rounded-xl bg-white/[0.03]">
+          <span class="text-white font-semibold text-sm">cudaMemcpy</span>
+          <p class="text-[#86868b] text-xs mt-1">Copy data Host↔Device</p>
         </div>
-        <div class="p-6 rounded-2xl bg-pink-500/5 border border-pink-500/10">
-          <div class="text-2xl mb-3">🕸️</div>
-          <h4 class="text-white font-semibold mb-2">Topologies</h4>
-          <p class="text-[#86868b] text-sm">Star and Peer-to-Peer configurations supported</p>
+        <div class="p-4 rounded-xl bg-white/[0.03]">
+          <span class="text-white font-semibold text-sm">cudaFree</span>
+          <p class="text-[#86868b] text-xs mt-1">Free GPU memory</p>
         </div>
       </div>
     </div>
 
-    <!-- Routing Protocols -->
+    <!-- CUDA Memory -->
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <div class="scroll-section bento-card p-8">
+        <h3 class="headline text-white mb-4">CUDA Memory Types</h3>
+        <div class="space-y-3">
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-xl">⚡</span>
+            <div>
+              <span class="text-white font-semibold text-sm">Registers</span>
+              <p class="text-[#86868b] text-xs mt-0.5">Fastest. Private memory for a single thread.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-xl">🔥</span>
+            <div>
+              <span class="text-white font-semibold text-sm">Shared Memory</span>
+              <p class="text-[#86868b] text-xs mt-0.5">Very fast. Shared only by threads in the same block.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/[0.03]">
+            <span class="text-xl">🌐</span>
+            <div>
+              <span class="text-white font-semibold text-sm">Global Memory</span>
+              <p class="text-[#86868b] text-xs mt-0.5">Large but slow. Accessible by all threads.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-section bento-card p-8">
+        <h3 class="headline text-white mb-4">Performance Considerations</h3>
+        <div class="space-y-3">
+          <div class="p-4 rounded-xl bg-red-500/5 border border-red-500/10">
+            <span class="text-red-400 font-semibold text-sm">Memory Coalescing</span>
+            <p class="text-[#86868b] text-xs mt-1">Consecutive threads accessing consecutive addresses = one fast transaction. Random access cripples performance.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-orange-500/5 border border-orange-500/10">
+            <span class="text-orange-400 font-semibold text-sm">Branch Divergence</span>
+            <p class="text-[#86868b] text-xs mt-1">Threads in a Warp (group of 32) taking different if/else paths forces sequential execution. Kill performance.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-yellow-500/5 border border-yellow-500/10">
+            <span class="text-yellow-400 font-semibold text-sm">Numerical Issues</span>
+            <p class="text-[#86868b] text-xs mt-1">Floating-point math isn't perfectly associative. Parallel sums may have tiny rounding differences vs CPU.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sparse Matrix & Dynamic Parallelism -->
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <div class="scroll-section bento-card p-8">
+        <span class="tag bg-indigo-500/10 text-indigo-400 mb-4 inline-block">Advanced</span>
+        <h3 class="headline text-white mb-4">Sparse Matrix Computation</h3>
+        <p class="body-text mb-4">Matrices mostly filled with zeros. Storing all zeros wastes GPU memory. Compressed using CSR (Compressed Sparse Row) format.</p>
+        <div class="space-y-2">
+          <div class="flex items-start gap-2"><span class="text-indigo-400 mt-0.5">•</span><span class="text-[#86868b] text-sm">Store only non-zero values and their coordinates</span></div>
+          <div class="flex items-start gap-2"><span class="text-indigo-400 mt-0.5">•</span><span class="text-[#86868b] text-sm"><span class="text-white">Regularization</span>: organize data so memory access is coalesced</span></div>
+          <div class="flex items-start gap-2"><span class="text-indigo-400 mt-0.5">•</span><span class="text-[#86868b] text-sm">Equal load balancing among threads</span></div>
+        </div>
+      </div>
+      <div class="scroll-section bento-card p-8">
+        <span class="tag bg-pink-500/10 text-pink-400 mb-4 inline-block">Advanced</span>
+        <h3 class="headline text-white mb-4">CUDA Dynamic Parallelism</h3>
+        <p class="body-text mb-4">Normally, CPU launches GPU kernels. Dynamic Parallelism allows a GPU thread to launch <span class="text-white">another GPU grid/kernel</span> directly — without talking to the CPU.</p>
+        <div class="p-4 rounded-xl bg-pink-500/5 border border-pink-500/10">
+          <p class="text-[#86868b] text-sm">Perfect for recursive algorithms (Quad-Trees, decision trees) where the GPU discovers it needs more work as it goes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case Studies -->
     <div class="scroll-section bento-card p-8 md:p-12">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="tag bg-blue-500/10 text-blue-400">Crucial for 7 Marks</span>
-      </div>
-      <h3 class="headline text-white mb-4">Routing Protocols Classification</h3>
-      <p class="body-text mb-8">Routing in WSNs is challenging due to no global addressing and severe energy limits.</p>
-
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="bento-card p-6 bg-[#0d0d0d] border-l-4 border-l-blue-500">
-          <h4 class="text-lg font-bold text-blue-400 mb-2">1. Proactive (Table-Driven)</h4>
-          <p class="text-[#86868b] text-sm">Maintains routing tables constantly. High overhead, zero delay when sending.</p>
-          <div class="mt-3 px-3 py-2 rounded-lg bg-blue-500/5 text-blue-400 text-xs font-mono">Example: DSDV</div>
+      <span class="tag bg-green-500/10 text-green-400 mb-6 inline-block">Application Case Studies</span>
+      <h3 class="headline text-white mb-6">Real-World CUDA Applications</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-blue-500/5 to-transparent border border-blue-500/10">
+          <div class="text-3xl mb-3">🧬</div>
+          <h4 class="text-white font-bold mb-2">Molecular Visualization</h4>
+          <p class="text-[#86868b] text-sm">N-body simulations — every atom exerts force on every other atom. GPUs assign one thread per atom to calculate total forces, enabling real-time chemical visualization.</p>
         </div>
-        <div class="bento-card p-6 bg-[#0d0d0d] border-l-4 border-l-green-500">
-          <h4 class="text-lg font-bold text-green-400 mb-2">2. Reactive (On-Demand)</h4>
-          <p class="text-[#86868b] text-sm">Finds route only when data needs to be sent. Lower overhead, initial delay.</p>
-          <div class="mt-3 px-3 py-2 rounded-lg bg-green-500/5 text-green-400 text-xs font-mono">Example: AODV, DSR</div>
-        </div>
-        <div class="bento-card p-6 bg-[#0d0d0d] border-l-4 border-l-purple-500">
-          <h4 class="text-lg font-bold text-purple-400 mb-2">3. Hybrid</h4>
-          <p class="text-[#86868b] text-sm">Combines both approaches. Proactive for local, reactive for distant nodes.</p>
-          <div class="mt-3 px-3 py-2 rounded-lg bg-purple-500/5 text-purple-400 text-xs font-mono">Example: ZRP</div>
-        </div>
-        <div class="bento-card p-6 bg-[#0d0d0d] border-l-4 border-l-yellow-500">
-          <h4 class="text-lg font-bold text-yellow-400 mb-2">4. Flooding / Power-Aware</h4>
-          <p class="text-[#86868b] text-sm">Flooding broadcasts blindly. Power-aware routes through highest battery nodes.</p>
-          <div class="mt-3 px-3 py-2 rounded-lg bg-yellow-500/5 text-yellow-400 text-xs font-mono">Maximize network lifetime</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider max-w-6xl mx-auto"></div>
-
-<!-- ==================== UNIT 4 ==================== -->
-<section id="unit4" class="section-pad relative">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="scroll-section mb-4">
-      <span class="caption text-[#86868b]">Unit 04</span>
-    </div>
-    <h2 class="scroll-section display-lg mb-6 max-w-3xl">
-      Applications of<br><span class="gradient-text-warm">WSN.</span>
-    </h2>
-    <p class="scroll-section body-text max-w-2xl mb-20">
-      Real-world implementations focused on Healthcare (WBAN), Machine Learning, and Fog Computing.
-    </p>
-
-    <!-- WBAN -->
-    <div class="scroll-section bento-card p-8 md:p-12 mb-6">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="tag bg-green-500/10 text-green-400">Expected 15 Mark Question</span>
-      </div>
-      <h3 class="headline text-white mb-4">Wireless Body Area Network (WBAN)</h3>
-      <p class="body-text mb-10">Tiny sensor nodes placed on, in, or around the human body to monitor physiological parameters.</p>
-
-      <!-- WBAN Flow -->
-      <div class="bento-card p-8 mb-10 bg-[#0d0d0d]">
-        <h4 class="text-center text-[#86868b] text-sm font-semibold mb-8 uppercase tracking-wider">WBAN Structure & Methodology</h4>
-        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-          <div class="flex flex-col gap-2 w-full md:w-auto">
-            <div class="bento-card px-4 py-3 bg-[#1a1a1a] text-red-400 text-sm font-medium text-center">❤️ ECG Sensor</div>
-            <div class="bento-card px-4 py-3 bg-[#1a1a1a] text-red-400 text-sm font-medium text-center">🌡️ Temp Sensor</div>
-            <div class="bento-card px-4 py-3 bg-[#1a1a1a] text-red-400 text-sm font-medium text-center">🫁 SpO2 Sensor</div>
-          </div>
-          <svg class="hidden md:block text-[#86868b]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          <svg class="md:hidden text-[#86868b] rotate-90" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          <div class="bento-card p-6 bg-[#1a1a1a] w-full md:w-40 text-center border-blue-500/20">
-            <div class="text-3xl mb-2">📱</div>
-            <h5 class="font-bold text-blue-400 text-sm">Personal Device</h5>
-            <p class="text-xs text-[#86868b] mt-1">PDA / Phone</p>
-          </div>
-          <svg class="hidden md:block text-[#86868b]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          <svg class="md:hidden text-[#86868b] rotate-90" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          <div class="bento-card p-6 bg-[#1a1a1a] w-full md:w-36 text-center border-slate-500/20">
-            <div class="text-3xl mb-2">🌐</div>
-            <h5 class="font-bold text-slate-300 text-sm">Internet<br>Wi-Fi</h5>
-          </div>
-          <svg class="hidden md:block text-[#86868b]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          <svg class="md:hidden text-[#86868b] rotate-90" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          <div class="bento-card p-6 bg-[#1a1a1a] w-full md:w-40 text-center border-green-500/20">
-            <div class="text-3xl mb-2">🏥</div>
-            <h5 class="font-bold text-green-400 text-sm">Medical Server</h5>
-            <p class="text-xs text-[#86868b] mt-1">Doctors/Database</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="p-6 rounded-2xl bg-red-500/5 border border-red-500/10">
-          <div class="text-2xl font-bold text-red-400 mb-2">Tier 1</div>
-          <h5 class="text-white font-semibold mb-2">Intra-body</h5>
-          <p class="text-[#86868b] text-sm">Communication between bodily sensors and personal device. Ultra-low power, high security.</p>
-        </div>
-        <div class="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/10">
-          <div class="text-2xl font-bold text-blue-400 mb-2">Tier 2</div>
-          <h5 class="text-white font-semibold mb-2">Extra-body</h5>
-          <p class="text-[#86868b] text-sm">Personal device to local access point. Short-range wireless transmission.</p>
-        </div>
-        <div class="p-6 rounded-2xl bg-green-500/5 border border-green-500/10">
-          <div class="text-2xl font-bold text-green-400 mb-2">Tier 3</div>
-          <h5 class="text-white font-semibold mb-2">Beyond-body</h5>
-          <p class="text-[#86868b] text-sm">Data transmitted securely over internet to medical databases for remote monitoring.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ML & Fog -->
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="scroll-section bento-card p-8 md:p-10">
-        <div class="icon-box bg-teal-500/10 text-teal-400 mb-6">🤖</div>
-        <h3 class="headline text-white mb-4">Machine Condition Monitoring</h3>
-        <p class="body-text mb-6">WSNs on industrial machines monitor vibrations, temperature, and acoustics.</p>
-        <div class="space-y-3">
-          <div class="p-4 rounded-2xl bg-white/[0.03]">
-            <span class="text-white font-semibold text-sm">Predictive Maintenance</span>
-            <p class="text-[#86868b] text-xs mt-1">ML models predict machine failure based on historical sensor data</p>
-          </div>
-          <div class="p-4 rounded-2xl bg-white/[0.03]">
-            <span class="text-white font-semibold text-sm">Techniques</span>
-            <p class="text-[#86868b] text-xs mt-1">SVM, Neural Networks for normal vs. faulty classification</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="scroll-section bento-card p-8 md:p-10">
-        <div class="icon-box bg-purple-500/10 text-purple-400 mb-6">☁️</div>
-        <h3 class="headline text-white mb-4">Fog-based IoT for Stress</h3>
-        <p class="body-text mb-6">Fog computing pushes processing closer to the edge rather than distant Cloud.</p>
-        <div class="space-y-3">
-          <div class="p-4 rounded-2xl bg-white/[0.03]">
-            <span class="text-white font-semibold text-sm">Low Latency</span>
-            <p class="text-[#86868b] text-xs mt-1">Critical for real-time health alerts</p>
-          </div>
-          <div class="p-4 rounded-2xl bg-white/[0.03]">
-            <span class="text-white font-semibold text-sm">Scenario</span>
-            <p class="text-[#86868b] text-xs mt-1">Wearables detect high HR & GSR → local gateway triggers instant alert</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider max-w-6xl mx-auto"></div>
-
-<!-- ==================== UNIT 5 ==================== -->
-<section id="unit5" class="section-pad relative">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="scroll-section mb-4">
-      <span class="caption text-[#86868b]">Unit 05</span>
-    </div>
-    <h2 class="scroll-section display-lg mb-6 max-w-3xl">
-      Case<br><span class="gradient-text-teal">Studies.</span>
-    </h2>
-    <p class="scroll-section body-text max-w-2xl mb-20">
-      In-depth implementations — understand specific challenges of Agriculture vs. Underwater environments.
-    </p>
-
-    <!-- Smart Agriculture -->
-    <div class="scroll-section bento-card p-8 md:p-12 mb-6 border-l-4 border-l-green-500">
-      <span class="tag bg-green-500/10 text-green-400 mb-6 inline-block">Precision Farming</span>
-      <h3 class="headline text-green-400 mb-4">Smart Agriculture Monitoring</h3>
-      <p class="body-text mb-10">Using WSNs to optimize crop yield and minimize resource usage (water, fertilizer).</p>
-
-      <div class="grid md:grid-cols-2 gap-8">
-        <div>
-          <h4 class="text-white font-semibold mb-4 flex items-center gap-2 text-[15px]">
-            <span class="w-8 h-8 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 text-sm">🌱</span>
-            Sensor Types Used
-          </h4>
-          <div class="space-y-3">
-            <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02]">
-              <span class="text-green-400">💧</span>
-              <span class="text-[#86868b] text-sm">Soil Moisture Sensors — automate irrigation</span>
-            </div>
-            <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02]">
-              <span class="text-green-400">🌡️</span>
-              <span class="text-[#86868b] text-sm">Temperature & Humidity — micro-climate</span>
-            </div>
-            <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02]">
-              <span class="text-green-400">☀️</span>
-              <span class="text-[#86868b] text-sm">Light sensors — photosynthesis tracking</span>
-            </div>
-            <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02]">
-              <span class="text-green-400">🧪</span>
-              <span class="text-[#86868b] text-sm">NPK Sensors — soil nutrient levels</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h4 class="text-white font-semibold mb-4 flex items-center gap-2 text-[15px]">
-            <span class="w-8 h-8 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-sm">🏗️</span>
-            System Architecture
-          </h4>
-          <div class="space-y-3">
-            <div class="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02]">
-              <span class="text-blue-400 text-sm font-mono mt-0.5">01</span>
-              <span class="text-[#86868b] text-sm">Nodes scattered across field form multi-hop mesh network</span>
-            </div>
-            <div class="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02]">
-              <span class="text-blue-400 text-sm font-mono mt-0.5">02</span>
-              <span class="text-[#86868b] text-sm">Data reaches localized Gateway (often solar-powered)</span>
-            </div>
-            <div class="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02]">
-              <span class="text-blue-400 text-sm font-mono mt-0.5">03</span>
-              <span class="text-[#86868b] text-sm">Gateway uses GSM/LoRa to send data to cloud platforms</span>
-            </div>
-            <div class="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02]">
-              <span class="text-blue-400 text-sm font-mono mt-0.5">04</span>
-              <span class="text-[#86868b] text-sm">Farmers receive alerts/dashboards on smartphones</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Underwater WSN -->
-    <div class="scroll-section bento-card p-8 md:p-12 border-l-4 border-l-blue-500">
-      <span class="tag bg-red-500/10 text-red-400 mb-6 inline-block">Complex Environment</span>
-      <h3 class="headline text-blue-400 mb-4">Underwater WSN (UWSN)</h3>
-      <p class="body-text mb-8">Oceanographic data collection, pollution monitoring, and offshore exploration.</p>
-
-      <div class="bento-card p-6 mb-8 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border-blue-500/20">
-        <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
-          <span class="text-2xl">🌊</span> The Major Challenge: Acoustic Channels
-        </h4>
-        <p class="text-[#86868b] text-sm">Radio waves attenuate rapidly in water. UWSNs use <span class="text-cyan-300 font-semibold">Acoustic signals (sound)</span>. Acoustic waves have high propagation delay (~1500m/s vs speed of light), low bandwidth, and suffer from high multipath fading and Doppler spread.</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="bento-card p-6 bg-[#0d0d0d] border-t-4 border-t-cyan-500">
-          <h4 class="text-lg font-bold text-cyan-400 mb-3">Link Estimation</h4>
-          <p class="text-[#86868b] text-sm">Underwater channel changes rapidly (currents, temperature gradients). Static routing fails. Nodes must constantly measure link quality to neighbors using ETX.</p>
-        </div>
-        <div class="bento-card p-6 bg-[#0d0d0d] border-t-4 border-t-indigo-500">
-          <h4 class="text-lg font-bold text-indigo-400 mb-3">Channel-Aware Routing</h4>
-          <p class="text-[#86868b] text-sm">Routing protocol uses link estimates to dynamically select the most stable path, avoiding nodes with poor acoustic connections to prevent packet loss and save energy.</p>
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-purple-500/5 to-transparent border border-purple-500/10">
+          <div class="text-3xl mb-3">🤖</div>
+          <h4 class="text-white font-bold mb-2">Machine Learning</h4>
+          <p class="text-[#86868b] text-sm">Deep learning = massive Matrix Multiplication (GEMM). Every output cell is independent, so GPUs calculate them all simultaneously. This is why AI exploded with GPUs.</p>
         </div>
       </div>
     </div>
@@ -1140,34 +1093,28 @@
 <!-- ==================== FOOTER ==================== -->
 <footer class="section-pad border-t border-white/5">
   <div class="max-w-6xl mx-auto px-6 text-center">
-    <div class="w-12 h-12 rounded-2xl bg-white text-black flex items-center justify-center font-bold text-xl mx-auto mb-6">S</div>
-    <h3 class="text-2xl font-bold text-white mb-2">SSN Exam Prep</h3>
-    <p class="text-[#86868b] mb-8">Course Code: 20E12E38 — Wireless Sensor Networks</p>
+    <div class="w-12 h-12 rounded-2xl bg-white text-black flex items-center justify-center font-bold text-xl mx-auto mb-6">H</div>
+    <h3 class="text-2xl font-bold text-white mb-2">HPC Exam Prep</h3>
+    <p class="text-[#86868b] mb-8">Course Code: 20CS257 — High Performance Computing</p>
     <div class="flex flex-wrap justify-center gap-3 mb-12">
-      <a href="#unit1" class="px-5 py-2.5 rounded-full bg-white/5 text-[#86868b] text-sm hover:bg-white/10 hover:text-white transition-all">Technology</a>
-      <a href="#unit2" class="px-5 py-2.5 rounded-full bg-white/5 text-[#86868b] text-sm hover:bg-white/10 hover:text-white transition-all">Architecture</a>
-      <a href="#unit3" class="px-5 py-2.5 rounded-full bg-white/5 text-[#86868b] text-sm hover:bg-white/10 hover:text-white transition-all">Protocols</a>
-      <a href="#unit4" class="px-5 py-2.5 rounded-full bg-white/5 text-[#86868b] text-sm hover:bg-white/10 hover:text-white transition-all">Applications</a>
-      <a href="#unit5" class="px-5 py-2.5 rounded-full bg-white/5 text-[#86868b] text-sm hover:bg-white/10 hover:text-white transition-all">Case Studies</a>
+      <a href="#unit1" class="px-5 py-2.5 rounded-full bg-white/5 text-[#86868b] text-sm hover:bg-white/10 hover:text-white transition-all">Parallel Processing</a>
+      <a href="#unit2" class="px-5 py-2.5 rounded-full bg-white/5 text-[#86868b] text-sm hover:bg-white/10 hover:text-white transition-all">OpenMP & MPI</a>
+      <a href="#unit3" class="px-5 py-2.5 rounded-full bg-white/5 text-[#86868b] text-sm hover:bg-white/10 hover:text-white transition-all">CUDA</a>
     </div>
-    <p class="text-[#86868b] text-sm">Good luck with your examination.</p>
+    <p class="text-[#86868b] text-sm">All the best for your examination. 🎯</p>
   </div>
 </footer>
 
 <script>
-// ============================================
-// GSAP SCROLL ANIMATIONS (Apple-style)
-// ============================================
+// GSAP Scroll Animations
 gsap.registerPlugin(ScrollTrigger);
 
-// Progress bar
 window.addEventListener('scroll', () => {
   const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   document.getElementById('progressFill').style.width = (winScroll / height) * 100 + '%';
 });
 
-// Navigation show/hide on scroll
 let lastScroll = 0;
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
@@ -1184,184 +1131,64 @@ window.addEventListener('scroll', () => {
   lastScroll = currentScroll;
 });
 
-// Hero entrance animation
 gsap.to('#heroCaption', { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power3.out' });
 gsap.to('#heroTitle', { opacity: 1, y: 0, duration: 1, delay: 0.4, ease: 'power3.out' });
 gsap.to('#heroBody', { opacity: 1, y: 0, duration: 0.8, delay: 0.6, ease: 'power3.out' });
 gsap.to('#heroButtons', { opacity: 1, y: 0, duration: 0.8, delay: 0.8, ease: 'power3.out' });
 gsap.to('#heroStats', { opacity: 1, y: 0, duration: 0.8, delay: 1, ease: 'power3.out' });
 
-// Scroll-triggered reveals
 gsap.utils.toArray('.scroll-section').forEach((elem) => {
-  gsap.fromTo(elem,
-    { opacity: 0, y: 50 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.9,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: elem,
-        start: 'top 88%',
-        toggleActions: 'play none none none'
-      }
-    }
-  );
+  gsap.fromTo(elem, { opacity: 0, y: 50 }, {
+    opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: elem, start: 'top 88%', toggleActions: 'play none none none' }
+  });
 });
 
-// Parallax for hero title
 gsap.to('#heroTitle', {
-  yPercent: 20,
-  ease: 'none',
-  scrollTrigger: {
-    trigger: 'section:first-of-type',
-    start: 'top top',
-    end: 'bottom top',
-    scrub: true
-  }
+  yPercent: 20, ease: 'none',
+  scrollTrigger: { trigger: 'section:first-of-type', start: 'top top', end: 'bottom top', scrub: true }
 });
 
-// ============================================
-// CANVAS PARTICLE NETWORK (Apple-style subtle)
-// ============================================
+// Canvas Particle Network
 const canvas = document.getElementById('hero-canvas');
 const ctx = canvas.getContext('2d');
 let width, height;
-
-function resize() {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', resize);
+function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
 
 const particles = [];
-const particleCount = 50;
-
-class Particle {
-  constructor() {
-    this.x = Math.random() * width;
-    this.y = Math.random() * height;
-    this.vx = (Math.random() - 0.5) * 0.3;
-    this.vy = (Math.random() - 0.5) * 0.3;
-    this.radius = Math.random() * 1.5 + 0.5;
-  }
-
-  update() {
-    this.x += this.vx;
-    this.y += this.vy;
-    if (this.x < 0 || this.x > width) this.vx *= -1;
-    if (this.y < 0 || this.y > height) this.vy *= -1;
-  }
-
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
-    ctx.fill();
-  }
-}
-
-for (let i = 0; i < particleCount; i++) {
-  particles.push(new Particle());
-}
-
-function drawConnections() {
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 150) {
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 * (1 - dist / 150)})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      }
-    }
-  }
+for (let i = 0; i < 50; i++) {
+  particles.push({
+    x: Math.random() * width, y: Math.random() * height,
+    vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+    r: Math.random() * 1.5 + 0.5
+  });
 }
 
 function animate() {
   ctx.clearRect(0, 0, width, height);
-  particles.forEach(p => { p.update(); p.draw(); });
-  drawConnections();
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0 || p.x > width) p.vx *= -1;
+    if (p.y < 0 || p.y > height) p.vy *= -1;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,255,255,0.15)'; ctx.fill();
+  });
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 150) {
+        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(255,255,255,${0.05 * (1 - dist / 150)})`; ctx.lineWidth = 0.5; ctx.stroke();
+      }
+    }
+  }
   requestAnimationFrame(animate);
 }
 animate();
 
-// ============================================
-// ENERGY CHART
-// ============================================
-function initChart() {
-  const c = document.getElementById('energyChart');
-  if (!c) return;
-  new Chart(c, {
-    type: 'doughnut',
-    data: {
-      labels: ['Communication', 'Sensing', 'Processing', 'Idle'],
-      datasets: [{
-        data: [65, 15, 10, 10],
-        backgroundColor: [
-          'rgba(99, 102, 241, 0.9)',
-          'rgba(234, 179, 8, 0.9)',
-          'rgba(168, 85, 247, 0.9)',
-          'rgba(148, 163, 184, 0.9)'
-        ],
-        borderColor: '#0d0d0d',
-        borderWidth: 4,
-        hoverOffset: 12
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      cutout: '68%',
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            color: '#86868b',
-            padding: 20,
-            font: { size: 12, family: 'Inter', weight: '500' },
-            usePointStyle: true,
-            pointStyle: 'circle'
-          }
-        },
-        tooltip: {
-          backgroundColor: '#1a1a1a',
-          titleColor: '#fff',
-          bodyColor: '#86868b',
-          borderColor: 'rgba(255,255,255,0.1)',
-          borderWidth: 1,
-          padding: 12,
-          cornerRadius: 12,
-          callbacks: {
-            label: (ctx) => ` ${ctx.label}: ~${ctx.parsed}%`
-          }
-        }
-      },
-      animation: {
-        animateRotate: true,
-        duration: 2000,
-        easing: 'easeOutQuart'
-      }
-    }
-  });
-}
-
-ScrollTrigger.create({
-  trigger: '#unit2',
-  start: 'top 60%',
-  onEnter: initChart,
-  once: true
-});
-
-// ============================================
-// MOBILE MENU
-// ============================================
+// Mobile Menu
 const menuBtn = document.getElementById('menuBtn');
 const mobileSheet = document.getElementById('mobileSheet');
 const mobileOverlay = document.getElementById('mobileOverlay');
@@ -1382,7 +1209,6 @@ menuBtn.addEventListener('click', toggleMenu);
 mobileOverlay.addEventListener('click', toggleMenu);
 mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     e.preventDefault();
@@ -1391,27 +1217,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ============================================
-// SUBTLE HOVER LIFT ON BENTO CARDS
-// ============================================
-// Only enable on devices with fine pointer (mouse/trackpad)
-// Skip entirely on touch devices
+// Subtle hover lift on bento cards (mouse only)
 const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-
 if (!isTouchDevice) {
   document.querySelectorAll('.bento-card').forEach(card => {
-    // Subtle lift on hover — no 3D rotation, just a gentle translate
     card.addEventListener('mouseenter', () => {
       card.style.transition = 'transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease';
       card.style.transform = 'translateY(-4px)';
     });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'translateY(0)';
-    });
+    card.addEventListener('mouseleave', () => { card.style.transform = 'translateY(0)'; });
   });
 }
 </script>
-
 </body>
 </html>
